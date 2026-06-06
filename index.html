@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Europe 2026">
+  <meta name="description" content="Bruce & Trudy Wells — Europe 2026 · 10 August – 22 September · Istanbul · Croatia Cruise · Rome · Puglia · Monopoli · Tokyo">
+  <meta name="theme-color" content="#1B3A6B">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="images/icon-192.png">
+  <title>Wells Europe 2026</title>
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #1B3A6B;
+      --navy-dk: #0d1f3c;
+      --gold:    #C9A84C;
+      --gold-lt: #e8c96e;
+      --white:   #ffffff;
+      --off-wh:  #f8f9fb;
+      --text:    #1a1a2e;
+      --text-lt: #555566;
+      --border:  #dde3ef;
+      --blue-lt: #D6E4F0;
+      --success: #2e7d32;
+      --warn:    #c0392b;
+      --radius:  10px;
+      --shadow:  0 2px 12px rgba(27,58,107,0.10);
+      --shadow-lg: 0 6px 28px rgba(27,58,107,0.16);
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font); color: var(--text); background: var(--off-wh); line-height: 1.6; }
+    a { color: var(--navy); text-decoration: none; }
+    a:hover { text-decoration: underline; color: var(--gold); }
+    img { max-width: 100%; height: auto; display: block; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { padding: 10px 14px; border: 1px solid var(--border); font-size: 14px; vertical-align: top; text-align: left; }
+    th { background: var(--blue-lt); color: var(--navy); font-weight: 600; }
+    tr:nth-child(even) td { background: #f5f8fc; }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    #site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--navy);
+      padding: 0 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 58px;
+      transition: height .25s, box-shadow .25s;
+      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+    #site-header.shrunk { height: 46px; }
+    .header-brand { color: var(--white); font-weight: 700; font-size: 17px; letter-spacing: .3px; }
+    .header-brand span { color: var(--gold); }
+
+    /* ── Desktop Nav ────────────────────────────────────────── */
+    .desktop-nav { display: flex; gap: 2px; }
+    .desktop-nav .nav-link {
+      color: rgba(255,255,255,.75); font-size: 13px; padding: 6px 10px; border-radius: 6px;
+      transition: background .2s, color .2s; white-space: nowrap;
+    }
+    .desktop-nav .nav-link:hover,
+    .desktop-nav .nav-link.active { background: rgba(255,255,255,.12); color: var(--white); text-decoration: none; }
+
+    /* ── Mobile Nav ─────────────────────────────────────────── */
+    #nav-toggle {
+      display: none; background: none; border: none; cursor: pointer; padding: 8px;
+      color: var(--white); font-size: 22px;
+    }
+    #mobile-nav {
+      display: none; position: fixed; top: 58px; left: 0; right: 0; z-index: 99;
+      background: var(--navy-dk); padding: 12px 16px; flex-direction: column; gap: 4px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.4);
+    }
+    #mobile-nav.open { display: flex; }
+    #mobile-nav .nav-link {
+      color: rgba(255,255,255,.8); padding: 10px 14px; border-radius: 8px;
+      font-size: 15px; transition: background .15s;
+    }
+    #mobile-nav .nav-link:hover { background: rgba(255,255,255,.1); text-decoration: none; color: var(--white); }
+
+    @media (max-width: 768px) {
+      .desktop-nav { display: none; }
+      #nav-toggle { display: block; }
+    }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    #hero {
+      background: linear-gradient(160deg, var(--navy-dk) 0%, var(--navy) 60%, #2a5298 100%);
+      color: var(--white);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+    #hero .eyebrow { color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+    #hero h1 { font-size: clamp(28px, 6vw, 52px); font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+    #hero h1 em { color: var(--gold); font-style: normal; }
+    #hero .subtitle { color: rgba(255,255,255,.75); font-size: 16px; margin-bottom: 32px; }
+    .stats-row { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 36px; font-weight: 800; color: var(--gold); line-height: 1; }
+    .stat-lbl { font-size: 12px; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+    /* ── Countdown ──────────────────────────────────────────── */
+    #countdown { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .cd-unit { text-align: center; background: rgba(255,255,255,.08); border-radius: var(--radius); padding: 12px 16px; min-width: 72px; }
+    .cd-num { font-size: 32px; font-weight: 800; color: var(--gold); line-height: 1; display: block; }
+    .cd-lbl { font-size: 11px; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
+    .cd-live { font-size: 20px; font-weight: 700; color: var(--gold); }
+    .route { font-size: 13px; color: rgba(255,255,255,.5); margin-top: 20px; letter-spacing: .3px; }
+
+    /* ── Status Dashboard ───────────────────────────────────── */
+    #dashboard {
+      background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow);
+      margin: 28px auto; max-width: 900px; padding: 24px 28px;
+    }
+    .dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .dash-cell { background: var(--off-wh); border-radius: 8px; padding: 14px 16px; border-left: 3px solid var(--navy); }
+    .dash-cell .label { font-size: 11px; font-weight: 700; color: var(--text-lt); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .dash-cell .value { font-size: 14px; font-weight: 600; color: var(--text); }
+    .status-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+    .status-pre    { background: #fff3cd; color: #856404; }
+    .status-active { background: #d4edda; color: var(--success); }
+    .status-done   { background: #d1ecf1; color: #0c5460; }
+
+    @media (max-width: 600px) {
+      .dash-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Main Layout ────────────────────────────────────────── */
+    .container { max-width: 960px; margin: 0 auto; padding: 0 18px; }
+
+    /* ── Section headings ───────────────────────────────────── */
+    .section-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--gold); margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: clamp(22px, 4vw, 32px); font-weight: 800; color: var(--navy);
+      margin-bottom: 4px; line-height: 1.2;
+    }
+    .section-subtitle { font-size: 14px; color: var(--text-lt); margin-bottom: 28px; }
+
+    /* ── Destination header ──────────────────────────────────── */
+    .dest-header {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: 22px 28px 18px;
+      margin-top: 36px;
+    }
+    .dest-header .dest-chapter { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+    .dest-header h2 { font-size: clamp(20px, 4vw, 30px); font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 4px; }
+    .dest-header .dest-meta { font-size: 14px; color: rgba(255,255,255,.7); }
+    .dest-body {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 8px;
+    }
+
+    /* ── Info boxes ──────────────────────────────────────────── */
+    .info-grid { display: grid; grid-template-columns: 200px 1fr; gap: 0; margin: 16px 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .info-row-label { background: var(--blue-lt); color: var(--navy); font-weight: 600; font-size: 13px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+    .info-row-value { font-size: 13px; padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--white); }
+    .info-row-label:last-of-type, .info-row-value:last-of-type { border-bottom: none; }
+
+    @media (max-width: 520px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .info-row-label { padding-bottom: 2px; border-bottom: none; }
+    }
+
+    /* ── Booking card ────────────────────────────────────────── */
+    .booking-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px; margin: 14px 0;
+      box-shadow: var(--shadow);
+    }
+    .booking-card h4 { font-size: 15px; color: var(--navy); font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+    .badge-green { background: #d4edda; color: var(--success); }
+    .badge-blue  { background: var(--blue-lt); color: var(--navy); }
+    .badge-gold  { background: #fff3cd; color: #856404; }
+    .badge-red   { background: #f8d7da; color: var(--warn); }
+
+    /* ── Flight table ────────────────────────────────────────── */
+    .flight-table th { background: var(--navy); color: var(--white); }
+    .flight-table tr:nth-child(even) td { background: #f0f4fa; }
+
+    /* ── Warning box ─────────────────────────────────────────── */
+    .warn-box {
+      background: #fff3cd; border: 1px solid #ffc107; border-left: 4px solid #e65100;
+      border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 13px; color: #5d3a00;
+    }
+    .warn-box strong { display: block; margin-bottom: 4px; }
+
+    /* ── Note box ───────────────────────────────────────────── */
+    .note-box {
+      background: var(--blue-lt); border-left: 4px solid var(--navy);
+      border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: 13px;
+    }
+
+    /* ── Collapsible ─────────────────────────────────────────── */
+    .collapsible-toggle {
+      width: 100%; background: var(--off-wh); border: 1px solid var(--border);
+      border-radius: 8px; padding: 13px 18px; text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 14px; font-weight: 600; color: var(--navy);
+      margin: 10px 0; transition: background .15s;
+    }
+    .collapsible-toggle:hover { background: var(--blue-lt); }
+    .chevron { transition: transform .25s; font-size: 12px; }
+    .chevron.rotated { transform: rotate(180deg); }
+    .collapsible-body { overflow: hidden; }
+    .collapsible-body.collapsed { display: none; }
+
+    /* ── Checklist ───────────────────────────────────────────── */
+    .checklist { list-style: none; margin: 8px 0; }
+    .checklist li { padding: 7px 0; font-size: 14px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before { content: '☐'; color: var(--navy); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── At a Glance table ───────────────────────────────────── */
+    #glance .glance-table th { font-size: 12px; }
+    #glance .glance-table td { font-size: 13px; }
+    #glance .glance-table td:first-child { font-weight: 700; color: var(--navy); white-space: nowrap; }
+
+    /* ── Sections ────────────────────────────────────────────── */
+    section { padding: 40px 0; }
+    section + section { padding-top: 0; }
+    .chapter-divider {
+      text-align: center; padding: 16px 0;
+      font-size: 11px; color: var(--text-lt); letter-spacing: 2px; text-transform: uppercase;
+      border-top: 1px solid var(--border); margin-top: 36px;
+    }
+
+    /* ── Back to top ─────────────────────────────────────────── */
+    #back-to-top {
+      position: fixed; bottom: 24px; right: 20px; z-index: 50;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--navy); color: var(--white); border: none; cursor: pointer;
+      font-size: 18px; box-shadow: var(--shadow-lg);
+      opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #back-to-top.visible { opacity: 1; pointer-events: auto; }
+    #back-to-top:hover { transform: translateY(-3px); background: var(--gold); color: var(--navy); }
+
+    /* ── Copy button ─────────────────────────────────────────── */
+    .copy-ref {
+      background: none; border: 1px solid var(--border); border-radius: 4px;
+      padding: 1px 6px; font-size: 11px; cursor: pointer; color: var(--text-lt);
+      margin-left: 6px; transition: background .15s;
+    }
+    .copy-ref:hover { background: var(--blue-lt); }
+
+    /* ── Map link ────────────────────────────────────────────── */
+    .map-link { font-size: 12px; color: var(--navy); margin-left: 6px; text-decoration: none; }
+    .map-link:hover { color: var(--gold); }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      background: var(--navy-dk); color: rgba(255,255,255,.6); text-align: center;
+      padding: 28px 20px; font-size: 12px; margin-top: 48px;
+    }
+    footer strong { color: var(--gold); }
+
+    /* ── Print ───────────────────────────────────────────────── */
+    @media print {
+      #site-header, #nav-toggle, #mobile-nav, #back-to-top, #dashboard { display: none !important; }
+      body { font-size: 11pt; color: #000; }
+      .dest-header { background: #1B3A6B !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .booking-card { box-shadow: none; border: 1px solid #ccc; }
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .dest-body { padding: 16px; }
+      .dest-header { padding: 16px 16px 12px; }
+      #hero { padding: 40px 16px 36px; }
+      table { font-size: 12px; }
+      th, td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<header id="site-header">
+  <div class="header-brand">✈️ Wells <span>Europe 2026</span></div>
+  <nav class="desktop-nav">
+    <a href="#glance"    class="nav-link">At a Glance</a>
+    <a href="#istanbul"  class="nav-link">Istanbul</a>
+    <a href="#zagreb"    class="nav-link">Zagreb</a>
+    <a href="#cruise"    class="nav-link">Cruise</a>
+    <a href="#rome"      class="nav-link">Rome</a>
+    <a href="#puglia"    class="nav-link">Puglia</a>
+    <a href="#monopoli"  class="nav-link">Monopoli</a>
+    <a href="#return"    class="nav-link">Return</a>
+    <a href="#flights"   class="nav-link">Flights</a>
+    <a href="#checklist" class="nav-link">Checklist</a>
+  </nav>
+  <button id="nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+</header>
+
+<!-- ── Mobile nav ─────────────────────────────────────────── -->
+<nav id="mobile-nav">
+  <a href="#glance"    class="nav-link">🗺 At a Glance</a>
+  <a href="#istanbul"  class="nav-link">🕌 Istanbul</a>
+  <a href="#zagreb"    class="nav-link">🏙 Zagreb</a>
+  <a href="#cruise"    class="nav-link">🚢 Croatia Cruise</a>
+  <a href="#rome"      class="nav-link">🏛 Rome</a>
+  <a href="#puglia"    class="nav-link">🚴 Puglia Cycling</a>
+  <a href="#monopoli"  class="nav-link">⛵ Monopoli</a>
+  <a href="#return"    class="nav-link">✈️ Return Journey</a>
+  <a href="#flights"   class="nav-link">📋 All Flights</a>
+  <a href="#checklist" class="nav-link">✅ Checklist</a>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="eyebrow">Bruce &amp; Trudy Wells</div>
+  <h1>Europe <em>2026</em></h1>
+  <p class="subtitle">10 August – 22 September 2026 &nbsp;·&nbsp; Adelaide to the World</p>
+
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">44</div><div class="stat-lbl">Days</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">Countries</div></div>
+    <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Destinations</div></div>
+    <div class="stat"><div class="stat-num">13</div><div class="stat-lbl">Nights at Sea</div></div>
+  </div>
+
+  <div id="countdown">
+    <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><div class="cd-lbl">Days</div></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><div class="cd-lbl">Hours</div></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-minutes">--</span><div class="cd-lbl">Mins</div></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-seconds">--</span><div class="cd-lbl">Secs</div></div>
+  </div>
+
+  <div class="route">Adelaide → Kuala Lumpur → Paris → Istanbul → Zagreb → Croatia Cruise → Rome → Puglia → Monopoli → Rome → Helsinki → Tokyo → Sydney → Adelaide</div>
+</section>
+
+<!-- ── Status Dashboard ───────────────────────────────────── -->
+<div class="container">
+  <div id="dashboard">
+    <div style="font-size:11px;font-weight:700;color:var(--text-lt);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;">🧭 Travel Dashboard</div>
+    <div class="dash-grid">
+      <div class="dash-cell"><div class="label">Today</div><div class="value" id="status-today">Checking…</div></div>
+      <div class="dash-cell"><div class="label">Tomorrow / Countdown</div><div class="value" id="status-tomorrow">Checking…</div></div>
+      <div class="dash-cell"><div class="label">Status</div><div class="value"><span id="status-state" class="status-badge status-pre">Checking…</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER I — AT A GLANCE                                   -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="glance">
+  <div class="container">
+    <div class="section-label">Chapter I</div>
+    <h2 class="section-title">Trip at a Glance</h2>
+    <p class="section-subtitle">Complete itinerary with confirmed bookings, accommodation references and key details.</p>
+
+    <div style="overflow-x:auto;">
+    <table class="glance-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Destination</th>
+          <th>Nights</th>
+          <th>Accommodation &amp; Reference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Mon 10 Aug</td><td>Adelaide → Kuala Lumpur</td><td>—</td><td>MH138 · Business · Seats 7D &amp; 7F · Ref: D9T6ND</td></tr>
+        <tr><td>Mon 10 Aug</td><td>Kuala Lumpur → Paris CDG</td><td>—</td><td>MH20 · Business · Seats 3D &amp; 3F · Terminal 2A</td></tr>
+        <tr><td>Tue 11 Aug</td><td>Paris CDG → Istanbul</td><td>—</td><td>Turkish Airlines direct · Seats 14J &amp; 14K · Ref: VX4ATE</td></tr>
+        <tr><td>11–17 Aug</td><td>Istanbul, Turkey</td><td>6</td><td>Wings Hotel Karakoy · Corner Suite Sea View <a href="https://maps.google.com/?q=Wings+Hotel+Karakoy+Istanbul" class="map-link" target="_blank">📍</a> · Conf: 195762067</td></tr>
+        <tr><td>Mon 17 Aug</td><td>Istanbul → Zagreb</td><td>—</td><td>TK1057 · Economy · Seats 10E &amp; 10F · Ref: VQIZH4 · ⚠️ Leave hotel 5:30 AM</td></tr>
+        <tr><td>17–19 Aug</td><td>Zagreb, Croatia</td><td>2</td><td>Artotel Zagreb (Radisson) · Petrinjska 7 <a href="https://maps.google.com/?q=Artotel+Zagreb+Petrinjska+7" class="map-link" target="_blank">📍</a> · Incl. breakfast &amp; transfer</td></tr>
+        <tr><td>19 Aug–1 Sep</td><td>Croatia Cruise</td><td>13</td><td>MV Lady Eleganza · Cabin 12 · Cat 1 · AUD $17,800/couple · Peter Williams, PHT</td></tr>
+        <tr><td>Tue 1 Sep</td><td>Dubrovnik → Rome</td><td>—</td><td>FR6883 Ryanair · 10:20 AM → 11:40 AM · Ref: W1RY6Q · Bus to Termini booked</td></tr>
+        <tr><td>1–3 Sep</td><td>Rome, Italy</td><td>2</td><td>The Republic Hotel · Via Gaeta 61 <a href="https://maps.google.com/?q=The+Republic+Hotel+Via+Gaeta+61+Rome" class="map-link" target="_blank">📍</a> · Conf: 1027955918</td></tr>
+        <tr><td>Wed 2 Sep</td><td>Rome — Cycling &amp; Cooking</td><td>—</td><td>Taste Roman Cuisine &amp; Cycle with a Chef · 9:30 AM · Via Marmorata 9 · Conf: TAWE388H</td></tr>
+        <tr><td>Thu 3 Sep</td><td>Rome → Lecce</td><td>—</td><td>Frecciargento 8303 · 1st Class · 08:00–14:20 · PNR: SW8VCN · Trudy: Car 3 13A · Bruce: Car 3 14A</td></tr>
+        <tr><td>4–10 Sep</td><td>Puglia Cycling Tour</td><td>7</td><td>Salento Bike &amp; Beach · €3,410 · Lecce · Gallipoli · Leuca · Otranto · Balance due 4 Aug 2026</td></tr>
+        <tr><td>Fri 4 Sep eve</td><td>Cooking Love — Lecce</td><td>—</td><td>Apulian Cooking Class · 6:30 PM · Via Galatina 161 · €316 CASH (€79pp) · Enza Pulimeno</td></tr>
+        <tr><td>11–18 Sep</td><td>Monopoli, Puglia</td><td>7</td><td>TBC — 3 options, all free cancellation (see Monopoli section)</td></tr>
+        <tr><td>Sat 12 Sep</td><td>Gozzo Boat Tour</td><td>—</td><td>Polignano Caves · 12:00 PM · Molo Margherita · Ref: GYG48YVGKKX4 · AUD $219.81</td></tr>
+        <tr><td>Sun 13 Sep</td><td>Apulian Cooking Class</td><td>—</td><td>Polignano a Mare · 11:00 AM · Via S. Vito 20 · Viator (booked)</td></tr>
+        <tr><td>14–16 Sep</td><td>Car Hire — Monopoli</td><td>—</td><td>Opel Astra · Plate GG701LG · Rent Here · €219 · Pickup 08:30 · Return 16 Sep 18:00</td></tr>
+        <tr><td>18–20 Sep</td><td>Rome — Return Stay</td><td>2</td><td>The Republic Hotel · Superior Room <a href="https://maps.google.com/?q=The+Republic+Hotel+Via+Gaeta+61+Rome" class="map-link" target="_blank">📍</a> · Conf: 1066371039 · €584.77</td></tr>
+        <tr><td>Sun 20 Sep</td><td>Rome → Helsinki</td><td>—</td><td>AY1762 · 10:30 AM → 2:55 PM · Seats 9E &amp; 9D · Ref: EMI6CC · ⚠️ Leave hotel 8:30 AM</td></tr>
+        <tr><td>Sun 20 Sep</td><td>Helsinki → Tokyo</td><td>—</td><td>JL48 · First Class · Boeing 777 · 5:55 PM → Tue 21 Sep 1:55 PM · Seats 2D &amp; 2F · Ref: E3Q4I6</td></tr>
+        <tr><td>21–22 Sep</td><td>Tokyo Haneda</td><td>1</td><td>Villa Fontaine Grand · Terminal 3 direct <a href="https://maps.google.com/?q=Villa+Fontaine+Grand+Haneda+Airport" class="map-link" target="_blank">📍</a> · Conf: 5753.486.527 · AUD $202.41</td></tr>
+        <tr><td>Tue 22 Sep</td><td>Tokyo → Sydney → Adelaide</td><td>—</td><td>QF26 + QF749 · Business throughout · Seats 2F &amp; 2E / 2A &amp; 2C · Ref: E5VBDD</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<div class="chapter-divider container">Chapter II — Destinations</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ISTANBUL                                                   -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="istanbul">
+  <div class="container">
+    <div class="dest-header">
+      <div class="dest-chapter">Phase I · Turkey</div>
+      <h2>Istanbul, Turkey</h2>
+      <div class="dest-meta">11 – 17 August 2026 &nbsp;·&nbsp; 6 Nights &nbsp;·&nbsp; Wings Hotel Karakoy</div>
+    </div>
+    <div class="dest-body">
+
+      <div class="booking-card">
+        <h4>🏨 Wings Hotel Karakoy <span class="badge badge-green">Paid in Full</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Address</div><div class="info-row-value">Gümrük Sok. No:26, Karakoy, Beyoglu, Istanbul 34425 <a href="https://maps.google.com/?q=Wings+Hotel+Karakoy+Istanbul" class="map-link" target="_blank">📍 Map</a></div>
+          <div class="info-row-label">Room</div><div class="info-row-value">Corner Suite — Sea View (Bosphorus view)</div>
+          <div class="info-row-label">Check-in</div><div class="info-row-value">Tuesday 11 August from 2:00 PM</div>
+          <div class="info-row-label">Check-out</div><div class="info-row-value">Monday 17 August by 12:00 noon</div>
+          <div class="info-row-label">Confirmation</div><div class="info-row-value">195762067 <button class="copy-ref" data-ref="195762067">📋</button> · Expedia: 73422291024653</div>
+        </div>
+        <div class="warn-box"><strong>⚠️ 17 August departure day</strong> TK1057 departs 7:30 AM — leave hotel by 5:30 AM. Early checkout arranged.</div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="istanbul-flights" aria-expanded="false">
+        ✈️ Inbound Flights <span class="chevron">▼</span>
+      </button>
+      <div id="istanbul-flights" class="collapsible-body collapsed">
+        <div class="booking-card">
+          <h4>MH138 Adelaide → Kuala Lumpur <span class="badge badge-blue">Business</span></h4>
+          <div class="info-grid">
+            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Monday 10 August · Departs 9:45 AM Adelaide · Arrives 4:00 PM KL</div>
+            <div class="info-row-label">Aircraft</div><div class="info-row-value">Airbus A330-900neo</div>
+            <div class="info-row-label">Seats</div><div class="info-row-value">7D (Bruce) &amp; 7F (Trudy)</div>
+            <div class="info-row-label">Booking Ref</div><div class="info-row-value">D9T6ND <button class="copy-ref" data-ref="D9T6ND">📋</button></div>
+          </div>
+        </div>
+        <div class="booking-card">
+          <h4>MH20 Kuala Lumpur → Paris CDG <span class="badge badge-blue">Business</span></h4>
+          <div class="info-grid">
+            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Monday 10 Aug 11:40 PM → Tuesday 11 Aug 6:55 AM Paris · Terminal 2A</div>
+            <div class="info-row-label">Aircraft</div><div class="info-row-value">Airbus A350-900</div>
+            <div class="info-row-label">Seats</div><div class="info-row-value">3D (Bruce) &amp; 3F (Trudy)</div>
+            <div class="info-row-label">Booking Ref</div><div class="info-row-value">D9T6ND <button class="copy-ref" data-ref="D9T6ND">📋</button></div>
+          </div>
+        </div>
+        <div class="booking-card">
+          <h4>Turkish Airlines Paris CDG → Istanbul <span class="badge badge-gold">Economy</span></h4>
+          <div class="info-grid">
+            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Tuesday 11 August · 11:40 AM → 4:10 PM Istanbul (3h 30m direct)</div>
+            <div class="info-row-label">Seats</div><div class="info-row-value">14J (Bruce) &amp; 14K (Trudy)</div>
+            <div class="info-row-label">Booking Ref</div><div class="info-row-value">VX4ATE <button class="copy-ref" data-ref="VX4ATE">📋</button> · EUR 536.66 paid</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="istanbul-activities" aria-expanded="false">
+        🎟 Booked Activities <span class="chevron">▼</span>
+      </button>
+      <div id="istanbul-activities" class="collapsible-body collapsed">
+        <div class="booking-card">
+          <h4>🏛️ Basilica Cistern Fast-Track Entry <span class="badge badge-green">Booked</span></h4>
+          <div class="info-grid">
+            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Thursday 13 August · 2:00 PM (arrive by 1:45 PM)</div>
+            <div class="info-row-label">Meeting Point</div><div class="info-row-value">Design Cafe, At Meydani Cd No:42, Fatih · Look for MegaPass flag <a href="https://maps.google.com/?q=Design+Cafe+At+Meydani+Cd+No+42+Fatih+Istanbul" class="map-link" target="_blank">📍</a></div>
+            <div class="info-row-label">Booking Ref</div><div class="info-row-value">GYG83XHLKXVQ <button class="copy-ref" data-ref="GYG83XHLKXVQ">📋</button> · AUD $140.62</div>
+            <div class="info-row-label">Tickets</div><div class="info-row-value">Email + WhatsApp 1 day before · Download audio guide · Bring headphones + charged phone</div>
+          </div>
+        </div>
+        <div class="booking-card">
+          <h4>🍢 Istanbul Culinary Tour — Local Hotspots &amp; Gourmet Street Foods <span class="badge badge-green">Booked</span></h4>
+          <div class="info-grid">
+            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Friday 14 August · 6:00 PM (arrive by 5:50 PM)</div>
+            <div class="info-row-label">Meeting Point</div><div class="info-row-value">Nordstern Hotel Galata, Tersane Caddesi No.5, Karakoy <a href="https://maps.google.com/?q=Nordstern+Hotel+Galata+Tersane+Caddesi+Karakoy" class="map-link" target="_blank">📍</a></div>
+            <div class="info-row-label">Provider</div><div class="info-row-value">DayTours byLocals · +90 543 836 28 45</div>
+            <div class="info-row-label">Booking Ref</div><div class="info-row-value">GYGBLHNBHV2M <button class="copy-ref" data-ref="GYGBLHNBHV2M">📋</button> · PIN: tvUIF964 · AUD $335.44</div>
+            <div class="info-row-label">Free Cancel</div><div class="info-row-value">Before 6:00 PM on 13 August</div>
+            <div class="info-row-label">Notes</div><div class="info-row-value">~2km walk · vegetarian diet accommodated · ends Taksim Square</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="istanbul-days" aria-expanded="false">
+        📅 Day-by-Day Plan <span class="chevron">▼</span>
+      </button>
+      <div id="istanbul-days" class="collapsible-body collapsed">
+        <div class="booking-card">
+          <h4>Thursday 13 August — Sultanahmet, Hagia Sophia &amp; Basilica Cistern</h4>
+          <ul style="font-size:14px;line-height:1.8;padding-left:18px;">
+            <li><strong>Morning:</strong> Hagia Sophia — arrive early to beat crowds (free entry)</li>
+            <li><strong>Blue Mosque</strong> — Free entry · ⚠️ Covered head/scarf, covered shoulders, remove shoes at entrance</li>
+            <li><strong>2:00 PM:</strong> Basilica Cistern Fast-Track (booked) — meet 1:45 PM</li>
+          </ul>
+        </div>
+        <div class="booking-card">
+          <h4>Friday 14 August — Kadikoy Ferry &amp; Culinary Tour</h4>
+          <ul style="font-size:14px;line-height:1.8;padding-left:18px;">
+            <li><strong>Morning:</strong> Ferry Karakoy → Kadikoy (Asian side, ~20 mins) · Wander market, try Ciya Sofrasi for lunch</li>
+            <li><strong>6:00 PM:</strong> Istanbul Culinary Tour (booked) — meet Nordstern Hotel Galata 5:50 PM</li>
+          </ul>
+        </div>
+        <div class="booking-card">
+          <h4>Saturday 15 August — Grand Bazaar &amp; Balat/Fener</h4>
+          <ul style="font-size:14px;line-height:1.8;padding-left:18px;">
+            <li><strong>8:30 AM:</strong> Grand Bazaar opens — T1 tram from Karakoy to Beyazit (~10 mins)</li>
+            <li><strong>Afternoon:</strong> Balat &amp; Fener neighbourhoods — Kiremit Caddesi, Merdivenli Yokuş, Vodina Caddesi, Arc Co Coffee</li>
+          </ul>
+        </div>
+        <div class="booking-card">
+          <h4>Sunday 16 August — Büyükada Princes Island</h4>
+          <ul style="font-size:14px;line-height:1.8;padding-left:18px;">
+            <li>Ferry from Eminonu (~75 mins) · Hire e-bikes at pier · Car-free island</li>
+            <li>Coastal ride · local lunch · return ferries from ~3 PM</li>
+            <li>⚠️ Avoid horse-drawn carriages</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="paul-tips" aria-expanded="false">
+        💡 Paul Champion's Istanbul Tips <span class="chevron">▼</span>
+      </button>
+      <div id="paul-tips" class="collapsible-body collapsed">
+        <div class="note-box">Personal recommendations from Paul Champion, experienced Istanbul traveller.</div>
+        <div class="booking-card">
+          <h4>🍽 Ciya Sofrasi — HIGHLY RECOMMENDED</h4>
+          <p style="font-size:14px;">Excellent traditional restaurant in Kadikoy on the Asian side. Ferry to Kadikoy then ~10–15 min walk. No bookings — may need to wait ~15 mins but absolutely worth it. <a href="https://maps.google.com/?q=Ciya+Sofrasi+Kadikoy+Istanbul" class="map-link" target="_blank">📍 Map</a> · <a href="https://www.theworlds50best.com/discovery/Establishments/Turkey/Istanbul/%C3%87iya-Sofras%C4%B1.html" target="_blank" style="font-size:12px;color:var(--navy);">🌐 World's 50 Best article</a></p>
+          <p style="font-size:12px;color:var(--text-lt);margin-top:4px;">Caferağa, Güneşli Bahçe Sok, Kadikoy</p>
+        </div>
+        <div class="booking-card">
+          <h4>🍽 Karaköy Lokantasi</h4>
+          <p style="font-size:14px;">Definitely worth eating at — excellent restaurant in the Karakoy waterfront neighbourhood, just a short walk from your hotel. <a href="https://maps.google.com/?q=Karakoy+Lokantasi+Istanbul" class="map-link" target="_blank">📍 Map</a></p>
+        </div>
+        <div class="booking-card">
+          <h4>🛁 Kılıç Ali Paşa Hamam — Turkish Bath</h4>
+          <p style="font-size:14px;">Beautiful old hammam building in Karakoy. Highly recommended for a traditional Turkish bath experience. Book in advance. <a href="https://maps.google.com/?q=Kilic+Ali+Pasa+Hamam+Karakoy+Istanbul" class="map-link" target="_blank">📍 Map</a></p>
+        </div>
+        <div class="booking-card">
+          <h4>🏛 Istanbul Archaeological Museum</h4>
+          <p style="font-size:14px;">One of Paul's favourite major sights — less visited than Hagia Sophia but exceptional. World-class collection. <a href="https://maps.google.com/?q=Istanbul+Archaeological+Museum" class="map-link" target="_blank">📍 Map</a></p>
+        </div>
+        <div class="booking-card">
+          <h4>🕌 Eyüp Sultan Mosque — Less Touristy</h4>
+          <p style="font-size:14px;">Reach by ferry on the Golden Horn. Tomb of Mohammed's standard-bearer. Pleasant ferry trip there — tram back toward Sultanahmet. <a href="https://maps.google.com/?q=Eyup+Sultan+Mosque+Istanbul" class="map-link" target="_blank">📍 Map</a></p>
+        </div>
+        <div class="booking-card">
+          <h4>⛴ Ferry to Üsküdar</h4>
+          <p style="font-size:14px;">From Beşiktaş or Kabataş — short crossing, very local feel. Walk along the waterfront. Very different to Sultanahmet. <a href="https://maps.google.com/?q=Uskudar+Istanbul" class="map-link" target="_blank">📍 Map</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ZAGREB                                                     -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="zagreb">
+  <div class="container">
+    <div class="dest-header">
+      <div class="dest-chapter">Phase II · Croatia</div>
+      <h2>Zagreb, Croatia</h2>
+      <div class="dest-meta">17 – 19 August 2026 &nbsp;·&nbsp; 2 Nights &nbsp;·&nbsp; Artotel Zagreb</div>
+    </div>
+    <div class="dest-body">
+      <div class="warn-box"><strong>⚠️ Early departure Istanbul</strong> TK1057 departs Istanbul 7:30 AM — leave Wings Hotel by 5:30 AM. Ref: VQIZH4 · Economy · Seats 10E (Bruce) &amp; 10F (Trudy)</div>
+      <div class="booking-card">
+        <h4>🏨 Artotel Zagreb (Radisson)</h4>
+        <div class="info-grid">
+          <div class="info-row-label">Address</div><div class="info-row-value">Petrinjska 7, 10000 Zagreb <a href="https://maps.google.com/?q=Artotel+Zagreb+Petrinjska+7" class="map-link" target="_blank">📍</a></div>
+          <div class="info-row-label">Dates</div><div class="info-row-value">17 August (check-in) → 19 August (transfer to cruise)</div>
+          <div class="info-row-label">Includes</div><div class="info-row-value">Breakfast + private group transfer to Rovinj for cruise embarkation</div>
+          <div class="info-row-label">Contact</div><div class="info-row-value">Peter Williams · peterw@pht.com.au · 0409 826 906</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- CROATIA CRUISE                                             -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="cruise">
+  <div class="container">
+    <div class="dest-header">
+      <div class="dest-chapter">Phase III · Adriatic, Croatia</div>
+      <h2>Croatia Cruise — MV Lady Eleganza</h2>
+      <div class="dest-meta">19 August – 1 September 2026 &nbsp;·&nbsp; 13 Nights</div>
+    </div>
+    <div class="dest-body">
+      <div class="booking-card">
+        <h4>🚢 MV Lady Eleganza <span class="badge badge-green">Fully Paid</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Cabin</div><div class="info-row-value">Cabin 12 · Category 1 · Lower Deck</div>
+          <div class="info-row-label">Embarkation</div><div class="info-row-value">Rovinj Harbour · 19 August · Group transfer from Zagreb included</div>
+          <div class="info-row-label">Disembarkation</div><div class="info-row-value">Dubrovnik · 1 September · Flights after 10:00 AM only</div>
+          <div class="info-row-label">Cost</div><div class="info-row-value">AUD $17,800 per couple · Deposit $5,000 + Balance $12,800 — PAID</div>
+          <div class="info-row-label">Contact</div><div class="info-row-value">Peter Williams · peterw@pht.com.au · +61 8 8350 5727 · 0409 826 906</div>
+        </div>
+      </div>
+
+      <div class="booking-card">
+        <h4>🗺 Route</h4>
+        <p style="font-size:13px;line-height:1.9;color:var(--text-lt);">Rovinj → Pula → Mali Lošinj → Zadar → Kornati → Šibenik → Primosten → Omis/Split → Bol → Hvar → Opuzen/Bosnia → Korčula → Slano → Cavtat → Dubrovnik</p>
+      </div>
+
+      <h4 style="font-size:15px;color:var(--navy);margin:20px 0 10px;font-weight:700;">✅ 4 Included Tours</h4>
+      <div class="booking-card"><h4>🍷 23 Aug — Kornati Island Waterfront Lunch <span class="badge badge-green">Included</span></h4><p style="font-size:14px;">Restaurant: Reston Aquarius or Festa · 12:00 noon · Sailing 09:00 · Arrive Šibenik 18:30</p></div>
+      <div class="booking-card"><h4>🍷 25 Aug — Stina Winery Tour, Bol, Brac Island <span class="badge badge-green">Included</span></h4><p style="font-size:14px;">Award-winning Dalmatian winery · guided tasting with local produce · Depart Omis 07:00 · Arrive Bol 10:00</p></div>
+      <div class="booking-card">
+        <h4>🚌 26 Aug — Bosnia River Safari &amp; Lunch <span class="badge badge-green">Included</span> <span class="badge badge-red">⚠️ BRING PASSPORT</span></h4>
+        <p style="font-size:14px;">Coach to Mostar → Stari Most (UNESCO bridge) → Neretva river safari → Lunch at Neretva Tavern (meat or veg)</p>
+      </div>
+      <div class="booking-card"><h4>🦪 28 Aug — Mali Ston Oyster Tour, 11:30 AM <span class="badge badge-green">Included</span></h4><p style="font-size:14px;">Floating oyster beds · fresh oysters tasted on the water · return to yacht for late lunch</p></div>
+
+      <div class="note-box" style="margin-top:16px;"><strong>What to Pack:</strong> Aqua shoes · boat licence (for jet ski) · warm layer for evenings · 2 bottles French Champagne per couple · passport. Dress-up nights: White Night + second themed night TBC.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ROME                                                       -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="rome">
+  <div class="container">
+    <div class="dest-header">
+      <div class="dest-chapter">Phase IV · Italy</div>
+      <h2>Rome, Italy</h2>
+      <div class="dest-meta">1 – 3 September 2026 &nbsp;·&nbsp; 2 Nights &nbsp;·&nbsp; The Republic Hotel</div>
+    </div>
+    <div class="dest-body">
+      <div class="booking-card">
+        <h4>✈️ FR6883 Dubrovnik → Rome (Ryanair)</h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Tuesday 1 September · 10:20 AM → 11:40 AM</div>
+          <div class="info-row-label">Booking Ref</div><div class="info-row-value">W1RY6Q <button class="copy-ref" data-ref="W1RY6Q">📋</button></div>
+          <div class="info-row-label">Transfer</div><div class="info-row-value">Bus booked airport → Roma Termini</div>
+        </div>
+      </div>
+      <div class="booking-card">
+        <h4>🏨 The Republic Hotel — First Stay <span class="badge badge-green">Booked</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Address</div><div class="info-row-value">Via Gaeta 61, Stazione Termini, Roma 00185 <a href="https://maps.google.com/?q=The+Republic+Hotel+Via+Gaeta+61+Rome" class="map-link" target="_blank">📍</a></div>
+          <div class="info-row-label">Dates</div><div class="info-row-value">Tue 1 Sep (check-in 2PM) → Thu 3 Sep</div>
+          <div class="info-row-label">Confirmation</div><div class="info-row-value">1027955918 <button class="copy-ref" data-ref="1027955918">📋</button> · +39 068 1157001</div>
+        </div>
+      </div>
+      <div class="booking-card">
+        <h4>🚲🍳 Taste Roman Cuisine &amp; Cycle with a Chef <span class="badge badge-green">Booked</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Wednesday 2 September · 9:30 AM – 1:30 PM</div>
+          <div class="info-row-label">Meeting Point</div><div class="info-row-value">Via Marmorata 9 <a href="https://maps.google.com/?q=Via+Marmorata+9+Rome" class="map-link" target="_blank">📍</a> · Metro B: Termini → Piramide (7 mins)</div>
+          <div class="info-row-label">Confirmation</div><div class="info-row-value">TAWE388H <button class="copy-ref" data-ref="TAWE388H">📋</button> · AUD $165.92</div>
+        </div>
+      </div>
+      <div class="booking-card">
+        <h4>🚄 Frecciargento 8303 Rome → Lecce <span class="badge badge-blue">1st Class</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Thursday 3 September · 08:00 → 14:20 CET (6h 20m)</div>
+          <div class="info-row-label">PNR</div><div class="info-row-value">SW8VCN <button class="copy-ref" data-ref="SW8VCN">📋</button> · Show to ticket inspector</div>
+          <div class="info-row-label">Trudy Wells</div><div class="info-row-value">Car 3 · Seat 13A · Ticket: 2835107839</div>
+          <div class="info-row-label">Bruce Wells</div><div class="info-row-value">Car 3 · Seat 14A · Ticket: 2835107837</div>
+          <div class="info-row-label">Order</div><div class="info-row-value">UZJA1U3Z7EPZR (ItaliaRail) · E-tickets on smartphone</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- PUGLIA                                                     -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="puglia">
+  <div class="container">
+    <div class="dest-header">
+      <div class="dest-chapter">Phase V · Italy</div>
+      <h2>Puglia, Italy</h2>
+      <div class="dest-meta">4 – 10 September 2026 &nbsp;·&nbsp; 7 Days &nbsp;·&nbsp; Salento Bike &amp; Beach Cycling Tour</div>
+    </div>
+    <div class="dest-body">
+      <div class="booking-card">
+        <h4>🚴 Puglia Cycling Tour — Salento Bike &amp; Beach <span class="badge badge-gold">Balance Due 4 Aug 2026</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Guests</div><div class="info-row-value">Bruce &amp; Trudy Wells + Phil &amp; Carolyn Hutt (2 rooms)</div>
+          <div class="info-row-label">E-bikes</div><div class="info-row-value">Trudy: 164cm female e-bike · Bruce: 180cm male e-bike (helmet, bag, spare tube, pump &amp; lock included)</div>
+          <div class="info-row-label">Includes</div><div class="info-row-value">7 nights hotels · breakfast daily · luggage transport · smartphone with tracks · medical &amp; luggage insurance · full assistance</div>
+          <div class="info-row-label">Total Cost</div><div class="info-row-value">€3,410 · Deposit €855 paid 12/7/25 · <strong>Balance €2,555 due 4 August 2026</strong></div>
+          <div class="info-row-label">Contact</div><div class="info-row-value">pugliacycletours.com · info@pugliacycletours.com · +39 080 205 11 87</div>
+        </div>
+      </div>
+
+      <h4 style="font-size:15px;color:var(--navy);margin:20px 0 10px;font-weight:700;">🏨 Hotel Itinerary</h4>
+      <table>
+        <thead><tr><th>Day</th><th>Date</th><th>Location</th><th>Hotel</th><th>Phone</th></tr></thead>
+        <tbody>
+          <tr><td>Day 1</td><td>4 Sep</td><td>Lecce</td><td>Arco Vecchio, Via Quinto Fabio Balbo 5 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce" class="map-link" target="_blank">📍</a></td><td>+39 0832 243620</td></tr>
+          <tr><td>Days 2–3</td><td>5–6 Sep</td><td>Gallipoli</td><td>Relais Corte Palmieri, Via Roncella 13 <a href="https://maps.google.com/?q=Via+Roncella+13+Gallipoli+Italy" class="map-link" target="_blank">📍</a></td><td>+39 0833 265318</td></tr>
+          <tr><td>Day 4</td><td>7 Sep</td><td>Leuca</td><td>Villa Romasi, Via Virgilio 55 <a href="https://maps.google.com/?q=Via+Virgilio+55+Leuca+Italy" class="map-link" target="_blank">📍</a></td><td>+39 335 491 602</td></tr>
+          <tr><td>Days 5–6</td><td>8–9 Sep</td><td>Otranto</td><td>Hotel San Giuseppe, Via Ottocento Martiri 60 <a href="https://maps.google.com/?q=Via+Ottocento+Martiri+60+Otranto+Italy" class="map-link" target="_blank">📍</a></td><td>+39 0836 802298</td></tr>
+          <tr><td>Day 7</td><td>10 Sep</td><td>Lecce (return)</td><td>Arco Vecchio, Via Quinto Fabio Balbo 5 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce" class="map-link" target="_blank">📍</a></td><td>+39 0832 243620</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box" style="margin-top:12px;">Check-in from 4:00 PM · Check-out by 10:00 AM · Breakfast included · City tax payable on site · Call hotel 30 mins before arrival</div>
+
+      <div class="booking-card" style="margin-top:20px;">
+        <h4>🍳 Cooking Love — Apulian Cooking Class <span class="badge badge-green">Booked</span> <span class="badge badge-red">💰 CASH €316</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Friday 4 September · 6:30 PM – 10:00 PM</div>
+          <div class="info-row-label">Address</div><div class="info-row-value">Via Galatina 161, Corigliano d'Otranto (Lecce) 73022 <a href="https://maps.google.com/?q=Via+Galatina+161+Corigliano+d+Otranto+Lecce" class="map-link" target="_blank">📍</a></div>
+          <div class="info-row-label">Instructor</div><div class="info-row-value">Enza Pulimeno — Cooking Love · info@cookinglove.it · +39 339 235 2874</div>
+          <div class="info-row-label">Price</div><div class="info-row-value"><strong>€316 total (€79pp) — CASH ON THE NIGHT. Bring euros!</strong></div>
+          <div class="info-row-label">Transport</div><div class="info-row-value">Taxi/Uber approx €60 return · Enza can arrange if needed</div>
+          <div class="info-row-label">WhatsApp</div><div class="info-row-value">Full details sent via WhatsApp a few days before</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- MONOPOLI                                                   -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="monopoli">
+  <div class="container">
+    <div class="dest-header">
+      <div class="dest-chapter">Phase VI · Puglia, Italy</div>
+      <h2>Monopoli, Italy</h2>
+      <div class="dest-meta">11 – 18 September 2026 &nbsp;·&nbsp; 7 Nights</div>
+    </div>
+    <div class="dest-body">
+
+      <button class="collapsible-toggle" data-target="mono-accom" aria-expanded="false">
+        🏨 Accommodation Options (Choose One) <span class="chevron">▼</span>
+      </button>
+      <div id="mono-accom" class="collapsible-body collapsed">
+        <div class="booking-card"><h4>Option A — Palazzo Mulini <span class="badge badge-green">Free Cancellation</span></h4><p style="font-size:14px;">13 Via Argento, Monopoli <a href="https://maps.google.com/?q=Via+Argento+13+Monopoli+Italy" class="map-link" target="_blank">📍</a> · Conf: 6973.389.178</p></div>
+        <div class="booking-card"><h4>Option B — Palazzo Dei Gesuiti <span class="badge badge-green">Free Cancellation</span></h4><p style="font-size:14px;">Piazza Garibaldi 32, Monopoli <a href="https://maps.google.com/?q=Piazza+Garibaldi+32+Monopoli+Italy" class="map-link" target="_blank">📍</a> · Conf: 5724.430.607</p></div>
+        <div class="booking-card"><h4>Option C — Airbnb Casa San Pietro (Louise) <span class="badge badge-green">Free Cancellation</span></h4><p style="font-size:14px;">Via San Pietro 3, Monopoli <a href="https://maps.google.com/?q=Via+San+Pietro+3+Monopoli+Italy" class="map-link" target="_blank">📍</a> · Conf: HM2RAJP2TT · Louise Allen: 0044 7946 609 656 · Nico Servidio: 0044 7712 577 454</p></div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="mono-activities" aria-expanded="false">
+        🎟 Booked Activities <span class="chevron">▼</span>
+      </button>
+      <div id="mono-activities" class="collapsible-body collapsed">
+        <div class="booking-card">
+          <h4>⛵ Gozzo Boat Tour — Polignano Caves <span class="badge badge-green">Booked</span></h4>
+          <div class="info-grid">
+            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Saturday 12 September · 12:00 PM (arrive 11:50 AM)</div>
+            <div class="info-row-label">Meeting Point</div><div class="info-row-value">Molo Margherita, Monopoli <a href="https://maps.google.com/?q=Molo+Margherita+Monopoli" class="map-link" target="_blank">📍</a></div>
+            <div class="info-row-label">Provider</div><div class="info-row-value">Croccante Experience · +39 350 009 6847</div>
+            <div class="info-row-label">Booking Ref</div><div class="info-row-value">GYG48YVGKKX4 <button class="copy-ref" data-ref="GYG48YVGKKX4">📋</button> · PIN: qYV@P2zv · AUD $219.81</div>
+            <div class="info-row-label">Free Cancel</div><div class="info-row-value">Before 12:00 PM on 11 September</div>
+          </div>
+        </div>
+        <div class="booking-card">
+          <h4>🍝 Apulian Cooking Class — Polignano a Mare <span class="badge badge-green">Booked</span></h4>
+          <div class="info-grid">
+            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Sunday 13 September · 11:00 AM</div>
+            <div class="info-row-label">Address</div><div class="info-row-value">Via S. Vito 20, Polignano a Mare <a href="https://maps.google.com/?q=Via+S.+Vito+20+Polignano+a+Mare" class="map-link" target="_blank">📍</a></div>
+            <div class="info-row-label">Booked via</div><div class="info-row-value">Viator — ticket after final payment</div>
+          </div>
+        </div>
+        <div class="booking-card">
+          <h4>🚗 Car Hire — Rent Here Monopoli</h4>
+          <div class="info-grid">
+            <div class="info-row-label">Vehicle</div><div class="info-row-value">Opel Astra compact automatic · Grey metallic · Plate: GG701LG · Agreement No: 244</div>
+            <div class="info-row-label">Pickup</div><div class="info-row-value">14 September 08:30 AM · Via San Vincenzo 13, Monopoli <a href="https://maps.google.com/?q=Via+San+Vincenzo+13+Monopoli" class="map-link" target="_blank">📍</a></div>
+            <div class="info-row-label">Return</div><div class="info-row-value">16 September 18:00 · Same address</div>
+            <div class="info-row-label">Cost</div><div class="info-row-value">€219.00 · €500 Kasko excess held on card at pickup</div>
+            <div class="info-row-label">Contact</div><div class="info-row-value">Sergio Ostuni · +39 3756377809 · rentheremonopoli@gmail.com</div>
+            <div class="info-row-label">⚠️ Return</div><div class="info-row-value">Return CLEAN &amp; FULL TANK. Penalty €90 + VAT if not clean. No travel outside Italy.</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="mono-restaurants" aria-expanded="false">
+        🍽 Louise's Restaurant Recommendations <span class="chevron">▼</span>
+      </button>
+      <div id="mono-restaurants" class="collapsible-body collapsed">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:8px;">
+          <div class="booking-card"><strong>Il Piazza Palmieri</strong> <a href="https://maps.google.com/?q=Il+Piazza+Palmieri+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Outdoor eating in the square · antipasti, pasta, fresh fish. A favourite.</p></div>
+          <div class="booking-card"><strong>Osteria San Giovanni</strong> <a href="https://maps.google.com/?q=Osteria+San+Giovanni+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Traditional Puglian dishes · quiet vico, Vico Verzella</p></div>
+          <div class="booking-card"><strong>La Locanda del Porto</strong> <a href="https://maps.google.com/?q=La+Locanda+del+Porto+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Excellent antipasti &amp; seafood · reservation recommended</p></div>
+          <div class="booking-card"><strong>My Wine</strong> <a href="https://maps.google.com/?q=My+Wine+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Excellent wine &amp; food · owner ran a successful London restaurant</p></div>
+          <div class="booking-card"><strong>Seacret</strong> <a href="https://maps.google.com/?q=Seacret+Cala+Batteria+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Stylish bar/restaurant overlooking Cala Batteria</p></div>
+          <div class="booking-card"><strong>Baldovino</strong> <a href="https://maps.google.com/?q=Baldovino+Largo+San+Giovanni+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Light food &amp; fab cocktails · Largo San Giovanni · often live music</p></div>
+          <div class="booking-card"><strong>Caffé Roma (Ice Cream 🍦)</strong> <a href="https://maps.google.com/?q=Caffe+Roma+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Best gelato in Monopoli · dark chocolate &amp; perla di Puglia recommended</p></div>
+          <div class="booking-card"><strong>Lido Bianco</strong> <a href="https://maps.google.com/?q=Lido+Bianco+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">South of centro storico · long reputation for fresh fish · more pricey</p></div>
+        </div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="mono-beaches" aria-expanded="false">
+        🏖 Beaches <span class="chevron">▼</span>
+      </button>
+      <div id="mono-beaches" class="collapsible-body collapsed">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:8px;">
+          <div class="booking-card"><strong>Porta Vecchia</strong> <a href="https://maps.google.com/?q=Porta+Vecchia+Beach+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Nearest beach · fine sand · crystal clear water · gets crowded in summer</p></div>
+          <div class="booking-card"><strong>Porto Bianco &amp; Porto Rosso</strong> <a href="https://maps.google.com/?q=Porto+Rosso+Beach+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Walking distance · deeper beaches · lie on grass if preferred</p></div>
+          <div class="booking-card"><strong>Lido Perla Nera</strong> <a href="https://maps.google.com/?q=Lido+Perla+Nera+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Beautiful swimming · bar/restaurant · live music evenings</p></div>
+          <div class="booking-card"><strong>Lido Cala Paradiso</strong> <a href="https://maps.google.com/?q=Lido+Cala+Paradiso+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Full facilities · tennis, volleyball, canoes · restaurant · free beach section</p></div>
+          <div class="booking-card"><strong>Porto Ghiacciolo</strong> <a href="https://maps.google.com/?q=Porto+Ghiacciolo+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Sandy cove · Abbazia Santo Stefano · public beach · bar/restaurant</p></div>
+          <div class="booking-card"><strong>Torre Guaceto</strong> <a href="https://maps.google.com/?q=Torre+Guaceto+Nature+Reserve+Brindisi" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Nature reserve ~30km towards Brindisi · stunning free sandy beach</p></div>
+        </div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="mono-daytrips" aria-expanded="false">
+        🚗 Day Trips from Monopoli <span class="chevron">▼</span>
+      </button>
+      <div id="mono-daytrips" class="collapsible-body collapsed">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:8px;">
+          <div class="booking-card"><strong>Polignano a Mare</strong> <a href="https://maps.google.com/?q=Polignano+a+Mare+Italy" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">8km · train, car or bike · baroque centro storico on cliff tops · Museo Pino Pascali</p></div>
+          <div class="booking-card"><strong>White Towns — Valle d'Itria</strong> <a href="https://maps.google.com/?q=Alberobello+Trulli+Italy" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Alberobello (trulli, 30 min) · Martina Franca · Locorotondo · Cisternino · Ostuni</p></div>
+          <div class="booking-card"><strong>Lecce</strong><p style="font-size:13px;margin-top:4px;">90 min drive or train · Baroque city · beautiful centro storico · excellent restaurants</p></div>
+          <div class="booking-card"><strong>Matera</strong> <a href="https://maps.google.com/?q=Matera+Italy" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Stunning cave city (James Bond!) · walk the ravine · best by car</p></div>
+          <div class="booking-card"><strong>Castellana Grotte / Caves</strong> <a href="https://maps.google.com/?q=Castellana+Grotte+Italy" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">30 min drive · fascinating caves for adults &amp; children · cool in summer</p></div>
+          <div class="booking-card"><strong>Lama degli Ulivi</strong> <a href="https://www.lamadegliulivi.it/en/" target="_blank" style="font-size:12px;color:var(--navy);">🌐 Website</a><p style="font-size:13px;margin-top:4px;">Botanical gardens · 15 min drive · ancient rock churches · book via website</p></div>
+        </div>
+      </div>
+
+      <button class="collapsible-toggle" data-target="mono-practical" aria-expanded="false">
+        ℹ️ Practical Information — Monopoli <span class="chevron">▼</span>
+      </button>
+      <div id="mono-practical" class="collapsible-body collapsed">
+        <div class="booking-card">
+          <h4>🚕 Local Taxis</h4>
+          <ul style="font-size:14px;line-height:2;list-style:none;">
+            <li>Taxi Fortunato (Annamaria) · +39 339 567 1241</li>
+            <li>EUROTAXI · +39 080 74 80 60 · info@euro-taxi.it</li>
+            <li>Gianni Taxi · +39 338 521 3478</li>
+            <li>Sergio Taxi · +39 366 549 8514</li>
+          </ul>
+        </div>
+        <div class="booking-card">
+          <h4>📅 Local Markets</h4>
+          <table><thead><tr><th>Day</th><th>Location</th></tr></thead><tbody>
+            <tr><td>Monday</td><td>Cisternino</td></tr>
+            <tr><td>Tuesday</td><td>Monopoli (8AM–1PM, behind football stadium)</td></tr>
+            <tr><td>Wednesday</td><td>Fasano &amp; Martina Franca</td></tr>
+            <tr><td>Thursday</td><td>Alberobello</td></tr>
+            <tr><td>Friday</td><td>Locorotondo &amp; Conversano</td></tr>
+            <tr><td>Saturday</td><td>Ostuni</td></tr>
+          </tbody></table>
+        </div>
+        <div class="booking-card">
+          <h4>🚨 Emergency Numbers</h4>
+          <ul style="font-size:14px;line-height:2;list-style:none;">
+            <li>Police: <strong>113</strong></li>
+            <li>Fire Brigade: <strong>115</strong></li>
+            <li>Ambulance: <strong>118</strong></li>
+          </ul>
+        </div>
+        <div class="booking-card">
+          <h4>🕐 Shop Opening Times</h4>
+          <p style="font-size:14px;">Monday–Saturday: 9:00–13:00 and 16:00–21:00. Sundays: closed except big supermarkets &amp; some bakers. Most tourist sites close 13:00–17:00.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- RETURN JOURNEY                                             -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="return">
+  <div class="container">
+    <div class="dest-header">
+      <div class="dest-chapter">Phase VII · Rome · Helsinki · Tokyo · Adelaide</div>
+      <h2>Return Journey</h2>
+      <div class="dest-meta">18 – 22 September 2026</div>
+    </div>
+    <div class="dest-body">
+      <div class="booking-card">
+        <h4>🏨 The Republic Hotel — Return Stay <span class="badge badge-green">Booked</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Room</div><div class="info-row-value">Superior Room · €584.77 · Welcome drink &amp; 10% off F&amp;B</div>
+          <div class="info-row-label">Dates</div><div class="info-row-value">Fri 18 Sep (check-in) → Sun 20 Sep (check-out)</div>
+          <div class="info-row-label">Confirmation</div><div class="info-row-value">1066371039 <button class="copy-ref" data-ref="1066371039">📋</button></div>
+        </div>
+        <div class="warn-box"><strong>⚠️ Sunday 20 September</strong> AY1762 departs 10:30 AM — leave hotel by 8:30 AM.</div>
+      </div>
+
+      <div class="booking-card">
+        <h4>✈️ AY1762 Rome → Helsinki</h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Sunday 20 September · 10:30 AM → 2:55 PM (3h 25m)</div>
+          <div class="info-row-label">Seats</div><div class="info-row-value">9E (Bruce) &amp; 9D (Trudy) · Finnair/Qantas Economy</div>
+          <div class="info-row-label">Booking Ref</div><div class="info-row-value">EMI6CC <button class="copy-ref" data-ref="EMI6CC">📋</button> · €94.72 paid</div>
+        </div>
+      </div>
+
+      <div class="booking-card">
+        <h4>✈️ JL48 Helsinki → Tokyo Haneda <span class="badge badge-blue">First Class</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Sunday 20 Sep · 5:55 PM → Tuesday 21 Sep 1:55 PM Tokyo</div>
+          <div class="info-row-label">Aircraft</div><div class="info-row-value">Boeing 777 · First Class · 14h non-stop</div>
+          <div class="info-row-label">Seats</div><div class="info-row-value">2D (Bruce) &amp; 2F (Trudy) · Japan Airlines/Qantas</div>
+          <div class="info-row-label">Booking Ref</div><div class="info-row-value">E3Q4I6 <button class="copy-ref" data-ref="E3Q4I6">📋</button> · €333.82 paid</div>
+        </div>
+      </div>
+
+      <div class="booking-card">
+        <h4>🏨 Villa Fontaine Grand Haneda Airport <span class="badge badge-green">Booked</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Location</div><div class="info-row-value">Directly connected to Terminal 3 <a href="https://maps.google.com/?q=Villa+Fontaine+Grand+Haneda+Airport" class="map-link" target="_blank">📍</a></div>
+          <div class="info-row-label">Dates</div><div class="info-row-value">Mon 21 Sep (check-in 3PM) → Tue 22 Sep (check-out 11AM)</div>
+          <div class="info-row-label">Cost</div><div class="info-row-value">AUD $202.41 · Free cancel until 18 Sep 23:59</div>
+          <div class="info-row-label">Confirmation</div><div class="info-row-value">5753.486.527 <button class="copy-ref" data-ref="5753.486.527">📋</button> · Booking.com PIN: 9300 · +81 3 6459 9770</div>
+        </div>
+      </div>
+
+      <div class="booking-card">
+        <h4>✈️ QF26 Tokyo Haneda → Sydney <span class="badge badge-blue">Business</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Tuesday 22 September · 6:55 AM → 6:00 PM Sydney</div>
+          <div class="info-row-label">Seats</div><div class="info-row-value">2F (Bruce) &amp; 2E (Trudy) · Airbus A330</div>
+          <div class="info-row-label">Booking Ref</div><div class="info-row-value">E5VBDD <button class="copy-ref" data-ref="E5VBDD">📋</button></div>
+        </div>
+      </div>
+
+      <div class="booking-card">
+        <h4>✈️ QF749 Sydney → Adelaide — 🏠 HOME! <span class="badge badge-blue">Business</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Tuesday 22 September · 8:55 PM → 10:35 PM Adelaide</div>
+          <div class="info-row-label">Seats</div><div class="info-row-value">2A (Bruce) &amp; 2C (Trudy) · Boeing 737</div>
+          <div class="info-row-label">Booking Ref</div><div class="info-row-value">E5VBDD <button class="copy-ref" data-ref="E5VBDD">📋</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ALL FLIGHTS                                                -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="flights">
+  <div class="container">
+    <div class="section-label">Chapter III</div>
+    <h2 class="section-title">Complete Flight Schedule</h2>
+    <div style="overflow-x:auto;">
+    <table class="flight-table">
+      <thead><tr><th>Date</th><th>Route</th><th>Dep</th><th>Arr</th><th>Flight</th><th>Class</th><th>Seats</th><th>Ref</th></tr></thead>
+      <tbody>
+        <tr><td>Mon 10 Aug</td><td>Adelaide → Kuala Lumpur</td><td>9:45 AM</td><td>4:00 PM</td><td>MH138</td><td>Business</td><td>7D &amp; 7F</td><td>D9T6ND</td></tr>
+        <tr><td>Mon 10 Aug</td><td>Kuala Lumpur → Paris CDG</td><td>11:40 PM</td><td>6:55 AM +1</td><td>MH20</td><td>Business</td><td>3D &amp; 3F</td><td>D9T6ND</td></tr>
+        <tr><td>Tue 11 Aug</td><td>Paris CDG → Istanbul IST</td><td>11:40 AM</td><td>4:10 PM</td><td>TK (direct)</td><td>Economy</td><td>14J &amp; 14K</td><td>VX4ATE</td></tr>
+        <tr><td>Mon 17 Aug</td><td>Istanbul → Zagreb</td><td>7:30 AM</td><td>8:40 AM</td><td>TK1057</td><td>Economy</td><td>10E &amp; 10F</td><td>VQIZH4</td></tr>
+        <tr><td>Tue 1 Sep</td><td>Dubrovnik → Rome Fiumicino</td><td>10:20 AM</td><td>11:40 AM</td><td>FR6883</td><td>Economy</td><td>—</td><td>W1RY6Q</td></tr>
+        <tr><td>Sun 20 Sep</td><td>Rome Fiumicino → Helsinki</td><td>10:30 AM</td><td>2:55 PM</td><td>AY1762</td><td>Economy</td><td>9E &amp; 9D</td><td>EMI6CC</td></tr>
+        <tr><td>Sun 20 Sep</td><td>Helsinki → Tokyo Haneda</td><td>5:55 PM</td><td>1:55 PM +1</td><td>JL48</td><td>First</td><td>2D &amp; 2F</td><td>E3Q4I6</td></tr>
+        <tr><td>Tue 22 Sep</td><td>Tokyo Haneda → Sydney</td><td>6:55 AM</td><td>6:00 PM</td><td>QF26</td><td>Business</td><td>2F &amp; 2E</td><td>E5VBDD</td></tr>
+        <tr><td>Tue 22 Sep</td><td>Sydney → Adelaide</td><td>8:55 PM</td><td>10:35 PM</td><td>QF749</td><td>Business</td><td>2A &amp; 2C</td><td>E5VBDD</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note-box" style="margin-top:12px;">Emirates backup booking (Ref: DPUXRO · AUD $3,530.74) held as alternative. Cancel before departure if using Malaysia Airlines routing.</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- CHECKLIST                                                  -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="checklist">
+  <div class="container">
+    <div class="section-label">Chapter IV</div>
+    <h2 class="section-title">Pre-Departure Checklist</h2>
+
+    <div class="booking-card">
+      <h4>📋 Before You Go</h4>
+      <ul class="checklist">
+        <li>Confirm Puglia Cycling Tour balance €2,555 paid by 4 August 2026</li>
+        <li>Cancel Emirates backup booking (DPUXRO) before 10 August</li>
+        <li>Choose and confirm Monopoli accommodation (3 options, all free cancellation)</li>
+        <li>Confirm car hire with Sergio — Rent Here Monopoli (+39 3756377809)</li>
+        <li>Ensure international driving licence available for car hire</li>
+        <li>Download GetYourGuide app — Basilica Cistern audio guide (GYG83XHLKXVQ)</li>
+        <li>Send phone number with country code to Cooking Love (Enza Pulimeno) for WhatsApp</li>
+        <li>Notify bank/cards of travel dates</li>
+        <li>Save all booking confirmations offline</li>
+        <li>Bring cash euros for Cooking Love class (€316 total / €79pp)</li>
+        <li>Pack: aqua shoes, scarf for Blue Mosque, warm layer for Croatia evenings, 2 bottles French Champagne for cruise</li>
+        <li>Bring passport to Bosnia day trip on 26 August</li>
+        <li>Bring headphones + fully charged phone for Basilica Cistern audio guide</li>
+        <li>Check free cancellation on Villa Fontaine Grand Tokyo — free until 18 Sep 23:59</li>
+      </ul>
+    </div>
+
+    <div class="booking-card" style="margin-top:16px;">
+      <h4>📞 Key Contacts</h4>
+      <table>
+        <thead><tr><th>Contact</th><th>Role</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Peter Williams</td><td>Phil Hoffmann Travel</td><td>peterw@pht.com.au · +61 8 8350 5727 · 0409 826 906</td></tr>
+          <tr><td>Enza Pulimeno</td><td>Cooking Love (Puglia)</td><td>info@cookinglove.it · +39 339 235 2874</td></tr>
+          <tr><td>Sergio Ostuni</td><td>Rent Here Monopoli</td><td>rentheremonopoli@gmail.com · +39 3756377809</td></tr>
+          <tr><td>Louise Allen</td><td>Airbnb Host — Monopoli</td><td>0044 7946 609 656 · 00 39 375 727 4347</td></tr>
+          <tr><td>Puglia Cycle Tours</td><td>Cycling Tour Operator</td><td>info@pugliacycletours.com · +39 080 205 11 87</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer>
+  <strong>Wells Europe 2026</strong><br>
+  Bruce &amp; Trudy Wells · 10 August – 22 September 2026<br>
+  Istanbul · Zagreb · Croatia · Rome · Puglia · Monopoli · Tokyo<br>
+  <span style="color:rgba(255,255,255,.4);font-size:11px;margin-top:8px;display:block;">Created with ❤️ · Confidential</span>
+</footer>
+
+<!-- ── Back to top ─────────────────────────────────────────── -->
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
+<script src="app.js"></script>
+</body>
+</html>
