@@ -32,12 +32,12 @@
       --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
     }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body { font-family: var(--font); color: var(--text); background: var(--off-wh); line-height: 1.6; }
+    body { font-family: var(--font); color: var(--text); background: var(--off-wh); line-height: 1.7; font-size: 16px; }
     a { color: var(--navy); text-decoration: none; }
     a:hover { text-decoration: underline; color: var(--gold); }
     img { max-width: 100%; height: auto; display: block; }
     table { border-collapse: collapse; width: 100%; }
-    th, td { padding: 10px 14px; border: 1px solid var(--border); font-size: 14px; vertical-align: top; text-align: left; }
+    th, td { padding: 11px 14px; border: 1px solid var(--border); font-size: 15px; vertical-align: top; text-align: left; }
     th { background: var(--blue-lt); color: var(--navy); font-weight: 600; }
     tr:nth-child(even) td { background: #f5f8fc; }
 
@@ -140,7 +140,7 @@
       font-size: clamp(22px, 4vw, 32px); font-weight: 800; color: var(--navy);
       margin-bottom: 4px; line-height: 1.2;
     }
-    .section-subtitle { font-size: 14px; color: var(--text-lt); margin-bottom: 28px; }
+    .section-subtitle { font-size: 16px; color: var(--text-lt); margin-bottom: 28px; }
 
     /* ── Destination header ──────────────────────────────────── */
     .dest-header {
@@ -152,7 +152,7 @@
     }
     .dest-header .dest-chapter { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
     .dest-header h2 { font-size: clamp(20px, 4vw, 30px); font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 4px; }
-    .dest-header .dest-meta { font-size: 14px; color: rgba(255,255,255,.7); }
+    .dest-header .dest-meta { font-size: 16px; color: rgba(255,255,255,.7); }
     .dest-body {
       background: var(--white);
       border: 1px solid var(--border);
@@ -165,8 +165,8 @@
 
     /* ── Info boxes ──────────────────────────────────────────── */
     .info-grid { display: grid; grid-template-columns: 200px 1fr; gap: 0; margin: 16px 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
-    .info-row-label { background: var(--blue-lt); color: var(--navy); font-weight: 600; font-size: 13px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
-    .info-row-value { font-size: 13px; padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--white); }
+    .info-row-label { background: var(--blue-lt); color: var(--navy); font-weight: 600; font-size: 15px; padding: 11px 14px; border-bottom: 1px solid var(--border); }
+    .info-row-value { font-size: 15px; padding: 11px 14px; border-bottom: 1px solid var(--border); background: var(--white); }
     .info-row-label:last-of-type, .info-row-value:last-of-type { border-bottom: none; }
 
     @media (max-width: 520px) {
@@ -180,7 +180,7 @@
       border-radius: var(--radius); padding: 18px 20px; margin: 14px 0;
       box-shadow: var(--shadow);
     }
-    .booking-card h4 { font-size: 15px; color: var(--navy); font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .booking-card h4 { font-size: 17px; color: var(--navy); font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
     .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
     .badge-green { background: #d4edda; color: var(--success); }
     .badge-blue  { background: var(--blue-lt); color: var(--navy); }
@@ -220,7 +220,7 @@
 
     /* ── Checklist ───────────────────────────────────────────── */
     .checklist { list-style: none; margin: 8px 0; }
-    .checklist li { padding: 7px 0; font-size: 14px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
+    .checklist li { padding: 9px 0; font-size: 16px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
     .checklist li:last-child { border-bottom: none; }
     .checklist li::before { content: '☐'; color: var(--navy); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
 
@@ -270,11 +270,35 @@
     footer strong { color: var(--gold); }
 
     /* ── Print ───────────────────────────────────────────────── */
+    /* ── Destination hero images ─────────────────────────────── */
+    .dest-header {
+      position: relative;
+      overflow: hidden;
+    }
+    .dest-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      opacity: 0.22;
+      pointer-events: none;
+      display: block;
+    }
+    .dest-header .dest-chapter,
+    .dest-header h2,
+    .dest-header .dest-meta {
+      position: relative;
+      z-index: 1;
+    }
+
     @media print {
       #site-header, #nav-toggle, #mobile-nav, #back-to-top, #dashboard { display: none !important; }
       body { font-size: 11pt; color: #000; }
       .dest-header { background: #1B3A6B !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .booking-card { box-shadow: none; border: 1px solid #ccc; }
+      .dest-hero-img { display: none; }
     }
 
     /* ── Responsive ──────────────────────────────────────────── */
@@ -380,16 +404,16 @@
         <tr><td>Mon 10 Aug</td><td>Adelaide → Kuala Lumpur</td><td>—</td><td>MH138 · Business · Seats 7D &amp; 7F · Ref: D9T6ND</td></tr>
         <tr><td>Mon 10 Aug</td><td>Kuala Lumpur → Paris CDG</td><td>—</td><td>MH20 · Business · Seats 3D &amp; 3F · Terminal 2A</td></tr>
         <tr><td>Tue 11 Aug</td><td>Paris CDG → Istanbul</td><td>—</td><td>Turkish Airlines direct · Seats 14J &amp; 14K · Ref: VX4ATE</td></tr>
+        <tr style="background:#fff8f0;"><td>Tue 11 Aug</td><td>Adelaide → Dubai (BACKUP)</td><td>—</td><td>EK441 · Business · 1E &amp; 1F · DPUXRO &nbsp; <a href="https://drive.google.com/file/d/1BenDe__8TIbCfQdODo_kyHuYiDs6grlC/view?usp=drivesdk" target="_blank" style="color:var(--navy);font-weight:700;">🎫 E-Tickets</a></td></tr>
+        <tr style="background:#fff8f0;"><td>Wed 12 Aug</td><td>Dubai → Istanbul (BACKUP)</td><td>—</td><td>EK123 · Business · 9E &amp; 9F · DPUXRO &nbsp; <a href="https://drive.google.com/file/d/1BenDe__8TIbCfQdODo_kyHuYiDs6grlC/view?usp=drivesdk" target="_blank" style="color:var(--navy);font-weight:700;">🎫 E-Tickets</a></td></tr>
         <tr><td>11–17 Aug</td><td>Istanbul, Turkey</td><td>6</td><td>Wings Hotel Karakoy · Corner Suite Sea View <a href="https://maps.google.com/?q=Wings+Hotel+Karakoy+Istanbul" class="map-link" target="_blank">📍</a> · Conf: 195762067</td></tr>
-        <tr style="background:#fff8f0;"><td>Tue 11 Aug</td><td>Adelaide → Dubai (BACKUP)</td><td>10:00 PM</td><td>5:40 AM +1</td><td>EK441</td><td>Business</td><td>1E &amp; 1F</td><td>DPUXRO</td></tr>
-        <tr style="background:#fff8f0;"><td>Wed 12 Aug</td><td>Dubai → Istanbul (BACKUP)</td><td>10:40 AM</td><td>2:25 PM</td><td>EK123</td><td>Business</td><td>9E &amp; 9F</td><td>DPUXRO</td></tr>
         <tr><td>Mon 17 Aug</td><td>Istanbul → Zagreb</td><td>—</td><td>TK1057 · Economy · Seats 10E &amp; 10F · Ref: VQIZH4 · ⚠️ Leave hotel 5:30 AM</td></tr>
         <tr><td>17–19 Aug</td><td>Zagreb, Croatia</td><td>2</td><td>Artotel Zagreb (Radisson) · Petrinjska 7 <a href="https://maps.google.com/?q=Artotel+Zagreb+Petrinjska+7" class="map-link" target="_blank">📍</a> · Incl. breakfast &amp; transfer</td></tr>
         <tr><td>19 Aug–1 Sep</td><td>Croatia Cruise</td><td>13</td><td>MV Lady Eleganza · Cabin 12 · Cat 1 · AUD $17,800/couple · Peter Williams, PHT</td></tr>
         <tr><td>Tue 1 Sep</td><td>Dubrovnik → Rome</td><td>—</td><td>FR6883 Ryanair · 10:20 AM → 11:40 AM · Ref: W1RY6Q · Bus to Termini booked</td></tr>
         <tr><td>1–3 Sep</td><td>Rome, Italy</td><td>2</td><td>The Republic Hotel · Via Gaeta 61 <a href="https://maps.google.com/?q=The+Republic+Hotel+Via+Gaeta+61+Rome" class="map-link" target="_blank">📍</a> · Conf: 1027955918</td></tr>
         <tr><td>Wed 2 Sep</td><td>Rome — Cycling &amp; Cooking</td><td>—</td><td>Taste Roman Cuisine &amp; Cycle with a Chef · 9:30 AM · Via Marmorata 9 · Conf: TAWE388H</td></tr>
-        <tr><td>Thu 3 Sep</td><td>Rome → Lecce</td><td>—</td><td>Frecciargento 8303 · 1st Class · 08:00–14:20 · PNR: SW8VCN · Trudy: Car 3 13A · Bruce: Car 3 14A</td></tr>
+        <tr><td>Thu 3 Sep</td><td>Rome → Lecce</td><td>—</td><td>Frecciargento 8303 · 1st Class · 08:00–14:20 · PNR: SW8VCN · Trudy: Car 3 13A · Bruce: Car 3 14A &nbsp; <a href="https://drive.google.com/file/d/1aWs5xi6itvhbgfqEOuRgaWuNqJoJVZrm/view?usp=drivesdk" target="_blank" style="color:var(--navy);font-weight:700;">🎫 E-Tickets</a></td></tr>
         <tr><td>4–10 Sep</td><td>Puglia Cycling Tour</td><td>7</td><td>Salento Bike &amp; Beach · €3,410 · Lecce · Gallipoli · Leuca · Otranto · Balance due 4 Aug 2026</td></tr>
         <tr><td>Fri 4 Sep eve</td><td>Cooking Love — Lecce</td><td>—</td><td>Apulian Cooking Class · 6:30 PM · Via Galatina 161 · €316 CASH (€79pp) · Enza Pulimeno</td></tr>
         <tr><td>11–18 Sep</td><td>Monopoli, Puglia</td><td>7</td><td>TBC — 3 options, all free cancellation (see Monopoli section)</td></tr>
@@ -407,7 +431,86 @@
   </div>
 </section>
 
-<div class="chapter-divider container">Chapter II — Destinations</div>
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- CHECKLIST                                                  -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="checklist">
+  <div class="container">
+    <div class="section-label">Chapter II</div>
+    <h2 class="section-title">Pre-Departure Checklist</h2>
+
+    <div class="booking-card">
+      <h4>📋 Before You Go</h4>
+      <ul class="checklist">
+        <li>Confirm Puglia Cycling Tour balance €2,555 paid by 4 August 2026</li>
+        <li>Cancel Emirates backup booking (DPUXRO) before 10 August</li>
+        <li>Choose and confirm Monopoli accommodation (3 options, all free cancellation)</li>
+        <li>Confirm car hire with Sergio — Rent Here Monopoli (+39 3756377809)</li>
+        <li>Ensure international driving licence available for car hire</li>
+        <li>Download GetYourGuide app — Basilica Cistern audio guide (GYG83XHLKXVQ)</li>
+        <li>Send phone number with country code to Cooking Love (Enza Pulimeno) for WhatsApp</li>
+        <li>Notify bank/cards of travel dates</li>
+        <li>Save all booking confirmations offline</li>
+        <li>Bring cash euros for Cooking Love class (€316 total / €79pp)</li>
+        <li>Pack: aqua shoes, scarf for Blue Mosque, warm layer for Croatia evenings, 2 bottles French Champagne for cruise</li>
+        <li>Bring passport to Bosnia day trip on 26 August</li>
+        <li>Bring headphones + fully charged phone for Basilica Cistern audio guide</li>
+        <li>Check free cancellation on Villa Fontaine Grand Tokyo — free until 18 Sep 23:59</li>
+      </ul>
+    </div>
+
+    <div class="booking-card" style="margin-top:16px;">
+      <h4>📞 Key Contacts</h4>
+      <table>
+        <thead><tr><th>Contact</th><th>Role</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Peter Williams</td><td>Phil Hoffmann Travel</td><td>peterw@pht.com.au · +61 8 8350 5727 · 0409 826 906</td></tr>
+          <tr><td>Enza Pulimeno</td><td>Cooking Love (Puglia)</td><td>info@cookinglove.it · +39 339 235 2874</td></tr>
+          <tr><td>Sergio Ostuni</td><td>Rent Here Monopoli</td><td>rentheremonopoli@gmail.com · +39 3756377809</td></tr>
+          <tr><td>Louise Allen</td><td>Airbnb Host — Monopoli</td><td>0044 7946 609 656 · 00 39 375 727 4347</td></tr>
+          <tr><td>Puglia Cycle Tours</td><td>Cycling Tour Operator</td><td>info@pugliacycletours.com · +39 080 205 11 87</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ALL FLIGHTS                                                -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="flights">
+  <div class="container">
+    <div class="section-label">Chapter III</div>
+    <h2 class="section-title">Complete Flight Schedule</h2>
+    <div style="overflow-x:auto;">
+    <table class="flight-table">
+      <thead><tr><th>Date</th><th>Route</th><th>Dep</th><th>Arr</th><th>Flight</th><th>Class</th><th>Seats</th><th>Ref</th></tr></thead>
+      <tbody>
+        <tr><td>Mon 10 Aug</td><td>Adelaide → Kuala Lumpur</td><td>9:45 AM</td><td>4:00 PM</td><td>MH138</td><td>Business</td><td>7D &amp; 7F</td><td>D9T6ND</td></tr>
+        <tr><td>Mon 10 Aug</td><td>Kuala Lumpur → Paris CDG</td><td>11:40 PM</td><td>6:55 AM +1</td><td>MH20</td><td>Business</td><td>3D &amp; 3F</td><td>D9T6ND</td></tr>
+        <tr><td>Tue 11 Aug</td><td>Paris CDG → Istanbul IST</td><td>11:40 AM</td><td>4:10 PM</td><td>TK (direct)</td><td>Economy</td><td>14J &amp; 14K</td><td>VX4ATE</td></tr>
+        <tr><td>Mon 17 Aug</td><td>Istanbul → Zagreb</td><td>7:30 AM</td><td>8:40 AM</td><td>TK1057</td><td>Economy</td><td>10E &amp; 10F</td><td>VQIZH4</td></tr>
+        <tr><td>Tue 1 Sep</td><td>Dubrovnik → Rome Fiumicino</td><td>10:20 AM</td><td>11:40 AM</td><td>FR6883</td><td>Economy</td><td>—</td><td>W1RY6Q</td></tr>
+        <tr><td>Thu 3 Sep</td><td>🚄 Rome → Lecce (Train)</td><td>08:00</td><td>14:20</td><td>Frecciargento 8303</td><td>1st Class</td><td>Trudy 13A · Bruce 14A</td><td>SW8VCN &nbsp; <a href="https://drive.google.com/file/d/1aWs5xi6itvhbgfqEOuRgaWuNqJoJVZrm/view?usp=drivesdk" target="_blank" style="color:var(--navy);font-weight:700;">🎫 E-Tickets</a></td></tr>
+        <tr><td>Sun 20 Sep</td><td>Rome Fiumicino → Helsinki</td><td>10:30 AM</td><td>2:55 PM</td><td>AY1762</td><td>Economy</td><td>9E &amp; 9D</td><td>EMI6CC</td></tr>
+        <tr><td>Sun 20 Sep</td><td>Helsinki → Tokyo Haneda</td><td>5:55 PM</td><td>1:55 PM +1</td><td>JL48</td><td>First</td><td>2D &amp; 2F</td><td>E3Q4I6</td></tr>
+        <tr><td>Tue 22 Sep</td><td>Tokyo Haneda → Sydney</td><td>6:55 AM</td><td>6:00 PM</td><td>QF26</td><td>Business</td><td>2F &amp; 2E</td><td>E5VBDD</td></tr>
+        <tr><td>Tue 22 Sep</td><td>Sydney → Adelaide</td><td>8:55 PM</td><td>10:35 PM</td><td>QF749</td><td>Business</td><td>2A &amp; 2C</td><td>E5VBDD</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note-box" style="margin-top:12px;">Emirates backup booking (Ref: DPUXRO · AUD $3,530.74) held as alternative. Cancel before departure if using Malaysia Airlines routing.</div>
+  </div>
+  <div class="container" style="padding-bottom:40px;">
+    <h3 style="font-size:20px;color:var(--navy);margin:32px 0 16px;font-weight:800;border-top:2px solid var(--gold);padding-top:20px;">✈️ Emirates — Backup Booking <span class="badge badge-red" style="font-size:13px;">⚠️ Cancel if not using</span></h3>
+    <div class="warn-box"><strong>⚠️ Cancel DPUXRO before 10 August 2026</strong> if via KL on Malaysia Airlines. AUD $3,530.74 paid.</div>
+    <div style="margin:12px 0 20px;padding:14px 16px;background:var(--blue-lt);border-radius:8px;text-align:center;"><a href="https://drive.google.com/file/d/1BenDe__8TIbCfQdODo_kyHuYiDs6grlC/view?usp=drivesdk" target="_blank" style="color:var(--navy);font-weight:700;font-size:16px;">🎫 View Emirates E-Tickets (Google Drive)</a></div>
+    <div class="booking-card"><h4>EK441 Adelaide → Dubai <span class="badge badge-blue">Business</span></h4><div class="info-grid"><div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Tue 11 Aug · 10:00 PM → 5:40 AM Wed · A350-900 · Seats 1E &amp; 1F · Ref: DPUXRO</div></div></div>
+    <div class="booking-card"><h4>EK123 Dubai → Istanbul <span class="badge badge-blue">Business</span></h4><div class="info-grid"><div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Wed 12 Aug · 10:40 AM → 2:25 PM · A380 · Seats 9E &amp; 9F · Ref: DPUXRO</div></div></div>
+  </div>
+</section>
+
+<div class="chapter-divider container">Chapter IV — Destinations</div>
 
 <!-- ══════════════════════════════════════════════════════════ -->
 <!-- ISTANBUL                                                   -->
@@ -415,23 +518,13 @@
 <section id="istanbul">
   <div class="container">
     <div class="dest-header">
+      <img src="images/istanbul.jpg" alt="Istanbul" class="dest-hero-img" onerror="this.style.display='none'">
       <div class="dest-chapter">Phase I · Turkey</div>
       <h2>Istanbul, Turkey</h2>
       <div class="dest-meta">11 – 17 August 2026 &nbsp;·&nbsp; 6 Nights &nbsp;·&nbsp; Wings Hotel Karakoy</div>
     </div>
     <div class="dest-body">
 
-      <div class="booking-card">
-        <h4>🏨 Wings Hotel Karakoy <span class="badge badge-green">Paid in Full</span></h4>
-        <div class="info-grid">
-          <div class="info-row-label">Address</div><div class="info-row-value">Gümrük Sok. No:26, Karakoy, Beyoglu, Istanbul 34425 <a href="https://maps.google.com/?q=Wings+Hotel+Karakoy+Istanbul" class="map-link" target="_blank">📍 Map</a></div>
-          <div class="info-row-label">Room</div><div class="info-row-value">Corner Suite — Sea View (Bosphorus view)</div>
-          <div class="info-row-label">Check-in</div><div class="info-row-value">Tuesday 11 August from 2:00 PM</div>
-          <div class="info-row-label">Check-out</div><div class="info-row-value">Monday 17 August by 12:00 noon</div>
-          <div class="info-row-label">Confirmation</div><div class="info-row-value">195762067 <button class="copy-ref" data-ref="195762067">📋</button> · Expedia: 73422291024653</div>
-        </div>
-        <div class="warn-box"><strong>⚠️ 17 August departure day</strong> TK1057 departs 7:30 AM — leave hotel by 5:30 AM. Early checkout arranged.</div>
-      </div>
 
       <button class="collapsible-toggle" data-target="istanbul-flights" aria-expanded="false">
         ✈️ Inbound Flights <span class="chevron">▼</span>
@@ -466,28 +559,25 @@
       </div>
 
       <button class="collapsible-toggle" data-target="emirates-flights" aria-expanded="false">
-        ✈️ Alternative Flights — Emirates Backup Booking <span class="badge badge-red">⚠️ Cancel if not using</span> <span class="chevron">▼</span>
+        ✈️ Emirates Backup Flights <span class="badge badge-red">⚠️ Cancel if not using</span> <span class="chevron">▼</span>
       </button>
       <div id="emirates-flights" class="collapsible-body collapsed">
-        <div class="warn-box"><strong>⚠️ Important</strong> This is a backup booking held as an alternative to the Malaysia Airlines routing. Cancel booking DPUXRO before 10 August 2026 if travelling via Kuala Lumpur. Do not let both bookings lapse.</div>
-        <div class="booking-card">
-          <h4>EK441 Adelaide → Dubai <span class="badge badge-blue">Business</span></h4>
-          <div class="info-grid">
-            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Tuesday 11 August · Departs 10:00 PM → Arrives Dubai 5:40 AM Wed 12 Aug</div>
-            <div class="info-row-label">Aircraft</div><div class="info-row-value">Airbus A350-900</div>
-            <div class="info-row-label">Seats</div><div class="info-row-value">1E (Bruce) &amp; 1F (Trudy)</div>
-            <div class="info-row-label">Booking Ref</div><div class="info-row-value">DPUXRO <button class="copy-ref" data-ref="DPUXRO">📋</button> · AUD $3,530.74 paid</div>
-          </div>
+        <div class="warn-box"><strong>⚠️ Cancel DPUXRO before 10 August 2026</strong> if using Malaysia Airlines. AUD $3,530.74 paid.</div>
+        <div style="margin:12px 0 16px;padding:14px 16px;background:var(--blue-lt);border-radius:8px;text-align:center;"><a href="https://drive.google.com/file/d/1BenDe__8TIbCfQdODo_kyHuYiDs6grlC/view?usp=drivesdk" target="_blank" style="color:var(--navy);font-weight:700;font-size:16px;">🎫 View Emirates E-Tickets (Google Drive)</a></div>
+        <div class="booking-card"><h4>EK441 Adelaide → Dubai <span class="badge badge-blue">Business</span></h4><div class="info-grid"><div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Tue 11 Aug · 10:00 PM → 5:40 AM Wed · A350-900 · Seats 1E &amp; 1F</div><div class="info-row-label">Ref</div><div class="info-row-value">DPUXRO <button class="copy-ref" data-ref="DPUXRO">📋</button> · AUD $3,530.74</div></div></div>
+        <div class="booking-card"><h4>EK123 Dubai → Istanbul <span class="badge badge-blue">Business</span></h4><div class="info-grid"><div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Wed 12 Aug · 10:40 AM → 2:25 PM · A380 · Seats 9E &amp; 9F</div><div class="info-row-label">Ref</div><div class="info-row-value">DPUXRO <button class="copy-ref" data-ref="DPUXRO">📋</button></div></div></div>
+      </div>
+
+      <div class="booking-card">
+        <h4>🏨 Wings Hotel Karakoy <span class="badge badge-green">Paid in Full</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Address</div><div class="info-row-value">Gümrük Sok. No:26, Karakoy, Beyoglu, Istanbul 34425 <a href="https://maps.google.com/?q=Wings+Hotel+Karakoy+Istanbul" class="map-link" target="_blank">📍 Map</a></div>
+          <div class="info-row-label">Room</div><div class="info-row-value">Corner Suite — Sea View (Bosphorus view)</div>
+          <div class="info-row-label">Check-in</div><div class="info-row-value">Tuesday 11 August from 2:00 PM</div>
+          <div class="info-row-label">Check-out</div><div class="info-row-value">Monday 17 August by 12:00 noon</div>
+          <div class="info-row-label">Confirmation</div><div class="info-row-value">195762067 <button class="copy-ref" data-ref="195762067">📋</button> · Expedia: 73422291024653</div>
         </div>
-        <div class="booking-card">
-          <h4>EK123 Dubai → Istanbul <span class="badge badge-blue">Business</span></h4>
-          <div class="info-grid">
-            <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Wednesday 12 August · Departs 10:40 AM → Arrives Istanbul 2:25 PM (4h 45m)</div>
-            <div class="info-row-label">Aircraft</div><div class="info-row-value">Airbus A380</div>
-            <div class="info-row-label">Seats</div><div class="info-row-value">9E (Bruce) &amp; 9F (Trudy)</div>
-            <div class="info-row-label">Booking Ref</div><div class="info-row-value">DPUXRO <button class="copy-ref" data-ref="DPUXRO">📋</button></div>
-          </div>
-        </div>
+        <div class="warn-box"><strong>⚠️ 17 August departure day</strong> TK1057 departs 7:30 AM — leave hotel by 5:30 AM. Early checkout arranged.</div>
       </div>
 
       <button class="collapsible-toggle" data-target="istanbul-activities" aria-expanded="false">
@@ -574,11 +664,7 @@
           <h4>🏛 Istanbul Archaeological Museum</h4>
           <p style="font-size:14px;">One of Paul's favourite major sights — less visited than Hagia Sophia but exceptional. World-class collection. <a href="https://maps.google.com/?q=Istanbul+Archaeological+Museum" class="map-link" target="_blank">📍 Map</a></p>
         </div>
-        <div class="booking-card">
-          <h4>🕌 Eyüp Sultan Mosque — Less Touristy</h4>
-          <p style="font-size:14px;">Reach by ferry on the Golden Horn. Tomb of Mohammed's standard-bearer. Pleasant ferry trip there — tram back toward Sultanahmet. <a href="https://maps.google.com/?q=Eyup+Sultan+Mosque+Istanbul" class="map-link" target="_blank">📍 Map</a></p>
-        </div>
-        <div class="booking-card">
+          <div class="booking-card">
           <h4>⛴ Ferry to Üsküdar</h4>
           <p style="font-size:14px;">From Beşiktaş or Kabataş — short crossing, very local feel. Walk along the waterfront. Very different to Sultanahmet. <a href="https://maps.google.com/?q=Uskudar+Istanbul" class="map-link" target="_blank">📍 Map</a></p>
         </div>
@@ -593,6 +679,7 @@
 <section id="zagreb">
   <div class="container">
     <div class="dest-header">
+      <img src="images/zagreb.jpg" alt="Zagreb" class="dest-hero-img" onerror="this.style.display='none'">
       <div class="dest-chapter">Phase II · Croatia</div>
       <h2>Zagreb, Croatia</h2>
       <div class="dest-meta">17 – 19 August 2026 &nbsp;·&nbsp; 2 Nights &nbsp;·&nbsp; Artotel Zagreb</div>
@@ -618,37 +705,180 @@
 <section id="cruise">
   <div class="container">
     <div class="dest-header">
+      <img src="images/croatia.jpg" alt="Croatia" class="dest-hero-img" onerror="this.style.display='none'">
       <div class="dest-chapter">Phase III · Adriatic, Croatia</div>
       <h2>Croatia Cruise — MV Lady Eleganza</h2>
       <div class="dest-meta">19 August – 1 September 2026 &nbsp;·&nbsp; 13 Nights</div>
     </div>
     <div class="dest-body">
+
       <div class="booking-card">
         <h4>🚢 MV Lady Eleganza <span class="badge badge-green">Fully Paid</span></h4>
         <div class="info-grid">
           <div class="info-row-label">Cabin</div><div class="info-row-value">Cabin 12 · Category 1 · Lower Deck</div>
           <div class="info-row-label">Embarkation</div><div class="info-row-value">Rovinj Harbour · 19 August · Group transfer from Zagreb included</div>
-          <div class="info-row-label">Disembarkation</div><div class="info-row-value">Dubrovnik · 1 September · Flights after 10:00 AM only</div>
+          <div class="info-row-label">Disembarkation</div><div class="info-row-value">Dubrovnik · 1 September by 10:00 AM · ✈️ FR6883 departs 10:20 AM</div>
           <div class="info-row-label">Cost</div><div class="info-row-value">AUD $17,800 per couple · Deposit $5,000 + Balance $12,800 — PAID</div>
+          <div class="info-row-label">🎒 What to Pack</div><div class="info-row-value">Aqua shoes · boat licence (for jet ski) · warm layer for evenings · 2 bottles French Champagne per couple · passport for Bosnia day (26 Aug) · Dress-up nights: White Night + second themed night TBC</div>
           <div class="info-row-label">Contact</div><div class="info-row-value">Peter Williams · peterw@pht.com.au · +61 8 8350 5727 · 0409 826 906</div>
         </div>
       </div>
 
       <div class="booking-card">
         <h4>🗺 Route</h4>
-        <p style="font-size:13px;line-height:1.9;color:var(--text-lt);">Rovinj → Pula → Mali Lošinj → Zadar → Kornati → Šibenik → Primosten → Omis/Split → Bol → Hvar → Opuzen/Bosnia → Korčula → Slano → Cavtat → Dubrovnik</p>
+        <p style="font-size:15px;line-height:2;color:var(--text-lt);">Rovinj → Pula → Mali Lošinj → Zadar → Kornati → Šibenik → Primosten → Omis/Split → Bol → Hvar → Opuzen/Bosnia → Korčula → Slano → Cavtat → Dubrovnik</p>
       </div>
 
-      <h4 style="font-size:15px;color:var(--navy);margin:20px 0 10px;font-weight:700;">✅ 4 Included Tours</h4>
-      <div class="booking-card"><h4>🍷 23 Aug — Kornati Island Waterfront Lunch <span class="badge badge-green">Included</span></h4><p style="font-size:14px;">Restaurant: Reston Aquarius or Festa · 12:00 noon · Sailing 09:00 · Arrive Šibenik 18:30</p></div>
-      <div class="booking-card"><h4>🍷 25 Aug — Stina Winery Tour, Bol, Brac Island <span class="badge badge-green">Included</span></h4><p style="font-size:14px;">Award-winning Dalmatian winery · guided tasting with local produce · Depart Omis 07:00 · Arrive Bol 10:00</p></div>
-      <div class="booking-card">
-        <h4>🚌 26 Aug — Bosnia River Safari &amp; Lunch <span class="badge badge-green">Included</span> <span class="badge badge-red">⚠️ BRING PASSPORT</span></h4>
-        <p style="font-size:14px;">Coach to Mostar → Stari Most (UNESCO bridge) → Neretva river safari → Lunch at Neretva Tavern (meat or veg)</p>
-      </div>
-      <div class="booking-card"><h4>🦪 28 Aug — Mali Ston Oyster Tour, 11:30 AM <span class="badge badge-green">Included</span></h4><p style="font-size:14px;">Floating oyster beds · fresh oysters tasted on the water · return to yacht for late lunch</p></div>
+      <!-- DAY BY DAY -->
+      <h4 style="font-size:18px;color:var(--navy);margin:28px 0 16px;font-weight:800;border-top:2px solid var(--gold);padding-top:18px;">📅 Day-by-Day Cruise Schedule</h4>
 
-      <div class="note-box" style="margin-top:16px;"><strong>What to Pack:</strong> Aqua shoes · boat licence (for jet ski) · warm layer for evenings · 2 bottles French Champagne per couple · passport. Dress-up nights: White Night + second themed night TBC.</div>
+      <div style="border-left:3px solid var(--gold);padding-left:16px;margin-bottom:8px;">
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Wed 19 Aug &nbsp;—&nbsp; Zagreb → Rovinj</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Arrive in Zagreb and transfer to your floating home for the next 13 nights — the elegant MV Lady Eleganza, docked in Rovinj. Designed and built in Croatia for cruising the Adriatic Coast, perfect for nestling into the region's small harbours and sheltered coves.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚌 Coach transfer from Zagreb</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Rovinj</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Thu 20 Aug &nbsp;—&nbsp; Rovinj → Pula</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Explore Rovinj — a gem on Croatia's Istrian peninsula. The picturesque Old Town stands on a headland where quaint houses nestle around the towering Church of St. Euphemia. In the afternoon, sail to Pula to discover the remarkably preserved Pula Arena — the only remaining Roman amphitheatre with all four walls intact, once housing 23,000 spectators for gladiatorial battles.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Sailing 11:00 AM – 1:00 PM</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Pula</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Fri 21 Aug &nbsp;—&nbsp; Pula → Mali Lošinj</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Depart Pula and stop for a swim at Unije before continuing to the island of Lošinj. Home to breathtaking bays and rich vegetation, the island's fresh sea air is infused with scents of lavender, sage and rosemary. Dock in Mali Lošinj, characterised by its large natural harbour and elegant pastel waterfront houses.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Sailing 9:30 AM – 5:00 PM</span>
+            <span style="font-size:13px;background:#d4edda;color:#2e7d32;padding:4px 10px;border-radius:6px;font-weight:600;">👥 Chris &amp; Karen Hall embark 5:00 PM</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Mali Lošinj</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Sat 22 Aug &nbsp;—&nbsp; Mali Lošinj → Zadar</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Sail to lively Zadar, located on a small peninsula on the Dalmatian Coast. Zadar historically rivalled Venice in importance and today retains an impressive collection of Roman ruins that seamlessly blend with the modern city.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Sailing 8:00 AM – 5:00 PM (swim stop en route)</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Zadar</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;border-left:3px solid #C9A84C;">
+          <h4>🚢 Sun 23 Aug &nbsp;—&nbsp; Zadar → Kornati Islands → Šibenik &nbsp;<span class="badge badge-green">🍽 Kornati Lunch Included</span></h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Sail via the stunning Kornati Islands — one of the most indented archipelagos in the Mediterranean. Arrive at the waterfront for a special included lunch at Reston Aquarius or Festa restaurant, then continue to the beautiful medieval city of Šibenik.</p>
+          <div style="margin:10px 0;padding:12px 14px;background:#fff3cd;border-radius:8px;border-left:3px solid var(--gold);">
+            <strong style="color:var(--navy);font-size:14px;">🍽 Included Tour — Kornati Island Waterfront Lunch</strong>
+            <p style="font-size:14px;margin-top:4px;color:var(--text);">Restaurant: Reston Aquarius or Festa · Lunch at 12:00 noon · Sail departs 9:00 AM · Arrive Šibenik 6:30 PM</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Sailing 9:00 AM · Lunch 12:00 · Arrive Šibenik 6:30 PM</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Šibenik</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Mon 24 Aug &nbsp;—&nbsp; Šibenik → Primosten → Omis/Split</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Morning visit to beautiful Primosten — a picturesque old town on a small peninsula — before arriving into the Omis/Split area for the afternoon. Explore Croatia's stunning Dalmatian coast.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Depart 8:00 AM · Primosten 9:30 AM · then Split/Omis</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Omis</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;border-left:3px solid #C9A84C;">
+          <h4>🚢 Tue 25 Aug &nbsp;—&nbsp; Omis → Bol (Brač) → Hvar &nbsp;<span class="badge badge-green">🍷 Stina Winery Included</span></h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Continue to the breathtaking island of Brač and the coastal town of Bol. The ship anchors offshore and returns for pick up after the winery tour. Then sail on to vibrant Hvar, arriving around 6:00 PM.</p>
+          <div style="margin:10px 0;padding:12px 14px;background:#fff3cd;border-radius:8px;border-left:3px solid var(--gold);">
+            <strong style="color:var(--navy);font-size:14px;">🍷 Included Tour — Stina Winery Tour, Bol, Brač Island</strong>
+            <p style="font-size:14px;margin-top:4px;color:var(--text);">Award-winning winery with a legacy dating to the early 1900s when the First Dalmatian Wine Cooperative was established in Bol. Expert staff guide you through white and red Dalmatian varieties. Wine tasting perfectly paired with local olives, artisanal cheeses and cured ham. Winery is next to the port — ship anchors offshore and returns for pick up.</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Depart Omis 7:00 AM · Bol 10:00 AM · Hvar ~6:00 PM</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Hvar</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;border-left:3px solid #c0392b;">
+          <h4>🚢 Wed 26 Aug &nbsp;—&nbsp; Hvar → Opuzen → Bosnia &nbsp;<span class="badge badge-red">🚌 Bosnia Safari Included &nbsp;⚠️ PASSPORT</span></h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Sail to Opuzen then travel by coach over the border into Bosnia &amp; Herzegovina. Visit Mostar and its famous World Heritage-listed Stari Most (Old Bridge) arching high above the Neretva River.</p>
+          <div style="margin:10px 0;padding:12px 14px;background:#f8d7da;border-radius:8px;border-left:3px solid #c0392b;">
+            <strong style="color:#c0392b;font-size:14px;">🚌 Included Tour — Bosnia River Safari &amp; Lunch at Neretva Tavern &nbsp;⚠️ BRING PASSPORT</strong>
+            <p style="font-size:14px;margin-top:4px;color:var(--text);">Collected by coach (approx 1 hour transfer) to the Neretva Swamp to board a traditional boat. Experience a unique blend of tradition, nature and hospitality. Arrive at the traditional riverside restaurant — wooden tables, roasted meats, brandy with a smile, tamburitza music. The food is not served, it is shared. Tour / river safari to Villa Neretva / Mostar. Choice of meat or vegetarian.</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Sailing 6:00 AM – 12:00 PM to Opuzen</span>
+            <span style="font-size:13px;background:#f8d7da;color:#c0392b;padding:4px 10px;border-radius:6px;font-weight:600;">⚠️ Bring passport — crossing into Bosnia &amp; Herzegovina</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Opuzen</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Thu 27 Aug &nbsp;—&nbsp; Opuzen → Korčula</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Arrive this afternoon to stroll along medieval streets flanked by palaces and beautiful town squares. Korčula is one of the best-preserved medieval towns on the Adriatic — often called Little Dubrovnik.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Depart 7:00 AM · Arrive 2:00 PM</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Korčula</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;border-left:3px solid #C9A84C;">
+          <h4>🚢 Fri 28 Aug &nbsp;—&nbsp; Korčula → Slano &nbsp;<span class="badge badge-green">🦪 Mali Ston Oysters Included</span></h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Sail from Korčula to Slano, arriving in time for a special coastal experience before a late lunch back on board.</p>
+          <div style="margin:10px 0;padding:12px 14px;background:#fff3cd;border-radius:8px;border-left:3px solid var(--gold);">
+            <strong style="color:var(--navy);font-size:14px;">🦪 Included Tour — Mali Ston Oyster Tour, 11:30 AM</strong>
+            <p style="font-size:14px;margin-top:4px;color:var(--text);">Discover the pristine waters and centuries-old shellfish traditions of Mali Ston — celebrated for producing some of the Adriatic's finest oysters and mussels. Board a local boat and glide across the bay to the floating oyster beds, where your host shares the fascinating history and cultivation techniques. Watch as fresh oysters and mussels are pulled straight from the sea, then enjoy a tasting right on the water. Transfer back to the yacht in time for a late lunch.</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Depart 7:00 AM · Arrive Slano 11:00 AM · Oysters 11:30 AM</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Slano</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Sat 29 Aug &nbsp;—&nbsp; Slano → Cavtat</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Morning cruise to the picturesque harbour town of Cavtat. Spend the afternoon exploring, with beautiful beaches and swim stops along the way.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Depart 7:00 AM · Arrive Cavtat 1:00 PM</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Cavtat</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Sun 30 Aug &nbsp;—&nbsp; Cavtat → Dubrovnik</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Afternoon sail from Cavtat to Dubrovnik — possibly a swim stop en route. Arrive in the jewel of the Adriatic.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⛵ Cavtat 10:00 AM – Dubrovnik 2:00 PM</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Dubrovnik</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚢 Mon 31 Aug &nbsp;—&nbsp; Dubrovnik</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">All day in the jewel of the Adriatic. Explore the magnificent old city walls, the marble-paved Stradun, and the crystal-clear waters below the cliffs.</p>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">⚓ At anchor all day</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Dubrovnik</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;background:#f0f4fa;">
+          <h4>🏁 Tue 1 Sep &nbsp;—&nbsp; Disembark Dubrovnik</h4>
+          <p style="font-size:15px;margin:6px 0;">Disembark by <strong>10:00 AM</strong>. ✈️ FR6883 Ryanair to Rome departs <strong>10:20 AM</strong> — be at Dubrovnik Airport by 9:00 AM.</p>
+        </div>
+
+      </div>
+
+
+
+
     </div>
   </div>
 </section>
@@ -659,6 +889,7 @@
 <section id="rome">
   <div class="container">
     <div class="dest-header">
+      <img src="images/rome.jpg" alt="Rome" class="dest-hero-img" onerror="this.style.display='none'">
       <div class="dest-chapter">Phase IV · Italy</div>
       <h2>Rome, Italy</h2>
       <div class="dest-meta">1 – 3 September 2026 &nbsp;·&nbsp; 2 Nights &nbsp;·&nbsp; The Republic Hotel</div>
@@ -672,7 +903,22 @@
           <div class="info-row-label">Transfer</div><div class="info-row-value">Bus booked airport → Roma Termini</div>
         </div>
       </div>
+      
       <div class="booking-card">
+        <h4>🚌 Sitbus Transfer — Rome Fiumicino → Roma Termini <span class="badge badge-green">Booked</span></h4>
+        <div class="info-grid">
+          <div class="info-row-label">Date</div><div class="info-row-value">Tuesday 1 September 2026 · after FR6883 lands at 11:40 AM</div>
+          <div class="info-row-label">Booking Ref</div><div class="info-row-value">RYT-NORAX <button class="copy-ref" data-ref="RYT-NORAX">📋</button> · Provider: Sitbus · Cost: €14.00</div>
+          <div class="info-row-label">Pick Up</div><div class="info-row-value">Rome Fiumicino Airport — outside <strong>Terminal 3, First Parking Lane No. 12</strong></div>
+          <div class="info-row-label">Drop Off</div><div class="info-row-value">Roma Termini Railway Station — <strong>Via Marsala 5</strong> (right-hand side) <a href="https://maps.google.com/?q=Via+Marsala+5+Roma+Termini" target="_blank" style="color:var(--navy);font-weight:700;">📍 Map</a></div>
+          <div class="info-row-label">Journey</div><div class="info-row-value">~60 minutes · stops at Via Aurelia and Vatican City en route</div>
+          <div class="info-row-label">Passenger</div><div class="info-row-value">Trudy Louise Wells · 2 adults</div>
+          <div class="info-row-label">Contact</div><div class="info-row-value">Sitbus: +39 06.5916826 · sit@sitbus.com</div>
+        </div>
+        <div class="warn-box" style="margin-top:10px;"><strong>⚠️ Show this voucher to the driver to board.</strong> Scheduled service — does not wait for delayed flights. Non-refundable.</div>
+      </div>
+
+<div class="booking-card">
         <h4>🏨 The Republic Hotel — First Stay <span class="badge badge-green">Booked</span></h4>
         <div class="info-grid">
           <div class="info-row-label">Address</div><div class="info-row-value">Via Gaeta 61, Stazione Termini, Roma 00185 <a href="https://maps.google.com/?q=The+Republic+Hotel+Via+Gaeta+61+Rome" class="map-link" target="_blank">📍</a></div>
@@ -695,12 +941,37 @@
           <div class="info-row-label">PNR</div><div class="info-row-value">SW8VCN <button class="copy-ref" data-ref="SW8VCN">📋</button> · Show to ticket inspector</div>
           <div class="info-row-label">Trudy Wells</div><div class="info-row-value">Car 3 · Seat 13A · Ticket: 2835107839</div>
           <div class="info-row-label">Bruce Wells</div><div class="info-row-value">Car 3 · Seat 14A · Ticket: 2835107837</div>
-          <div class="info-row-label">Order</div><div class="info-row-value">UZJA1U3Z7EPZR (ItaliaRail) · E-tickets on smartphone &nbsp;·&nbsp; <a href="https://drive.google.com/file/d/1aWs5xi6itvhbgfqEOuRgaWuNqJoJVZrm/view?usp=drivesdk" target="_blank" style="color:var(--navy);font-weight:600;">🎫 View E-Tickets</a></div>
+          <div class="info-row-label">Order</div><div class="info-row-value">UZJA1U3Z7EPZR (ItaliaRail) · E-tickets on smartphone &nbsp;·&nbsp; <a href="https://drive.google.com/file/d/1aWs5xi6itvhbgfqEOuRgaWuNqJoJVZrm/view?usp=drivesdk" target="_blank" style="color:var(--navy);font-weight:700;">🎫 E-Tickets</a></div>
         </div>
+      </div>
+
+<!-- LECCE ARRIVAL NIGHT -->
+<section id="lecce-arrival">
+  <div class="container">
+    <div class="dest-header">
+      <img src="images/lecce.jpg" alt="Lecce" class="dest-hero-img" onerror="this.style.display='none'">
+      <div class="dest-chapter">Phase IV (cont.) · Italy</div>
+      <h2>Lecce, Italy — Arrival Night</h2>
+      <div class="dest-meta">3 September 2026 &nbsp;·&nbsp; 1 Night &nbsp;·&nbsp; Arco Vecchio</div>
+    </div>
+    <div class="dest-body">
+      <div class="note-box">Arriving Lecce on the Frecciargento at 14:20 — one night before the Puglia Cycling Tour begins on 4 September. Same hotel as booked by Puglia Cycle Tours for Day 1.</div>
+      <div class="booking-card">
+        <h4>🏨 Arco Vecchio — Lecce</h4>
+        <div class="info-grid">
+          <div class="info-row-label">Address</div><div class="info-row-value">Via Quinto Fabio Balbo 5, Lecce &nbsp; <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce+Italy" target="_blank" style="color:var(--navy);font-weight:700;">📍 Map</a></div>
+          <div class="info-row-label">Phone</div><div class="info-row-value">+39 0832 243620</div>
+          <div class="info-row-label">Room</div><div class="info-row-value">Superior Room (Double)</div>
+          <div class="info-row-label">Check-in</div><div class="info-row-value">Thursday 3 September from 4:00 PM</div>
+          <div class="info-row-label">Check-out</div><div class="info-row-value">Saturday 5 September by 10:00 AM</div>
+          <div class="info-row-label">Booked by</div><div class="info-row-value">Puglia Cycle Tours · pugliacycletours.com · +39 080 205 11 87</div>
+        </div>
+        <div class="note-box" style="margin-top:10px;">Also staying: Hutt Carolyn &amp; Phil (Double Room) · City tax payable on site · Breakfast included · Call hotel 30 mins before arrival</div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- ══════════════════════════════════════════════════════════ -->
 <!-- PUGLIA                                                     -->
@@ -708,36 +979,16 @@
 <section id="puglia">
   <div class="container">
     <div class="dest-header">
+      <img src="images/puglia.jpg" alt="Puglia" class="dest-hero-img" onerror="this.style.display='none'">
       <div class="dest-chapter">Phase V · Italy</div>
       <h2>Puglia, Italy</h2>
       <div class="dest-meta">4 – 10 September 2026 &nbsp;·&nbsp; 7 Days &nbsp;·&nbsp; Salento Bike &amp; Beach Cycling Tour</div>
     </div>
     <div class="dest-body">
-      <div class="booking-card">
-        <h4>🚴 Puglia Cycling Tour — Salento Bike &amp; Beach <span class="badge badge-gold">Balance Due 4 Aug 2026</span></h4>
-        <div class="info-grid">
-          <div class="info-row-label">Guests</div><div class="info-row-value">Bruce &amp; Trudy Wells + Phil &amp; Carolyn Hutt (2 rooms)</div>
-          <div class="info-row-label">E-bikes</div><div class="info-row-value">Trudy: 164cm female e-bike · Bruce: 180cm male e-bike (helmet, bag, spare tube, pump &amp; lock included)</div>
-          <div class="info-row-label">Includes</div><div class="info-row-value">7 nights hotels · breakfast daily · luggage transport · smartphone with tracks · medical &amp; luggage insurance · full assistance</div>
-          <div class="info-row-label">Total Cost</div><div class="info-row-value">€3,410 · Deposit €855 paid 12/7/25 · <strong>Balance €2,555 due 4 August 2026</strong></div>
-          <div class="info-row-label">Contact</div><div class="info-row-value">pugliacycletours.com · info@pugliacycletours.com · +39 080 205 11 87</div>
-        </div>
-      </div>
+      <div class="note-box" style="margin-bottom:16px;">The evening of 4 September includes a separate booked cooking class — independent of the cycling tour.</div>
 
-      <h4 style="font-size:15px;color:var(--navy);margin:20px 0 10px;font-weight:700;">🏨 Hotel Itinerary</h4>
-      <table>
-        <thead><tr><th>Day</th><th>Date</th><th>Location</th><th>Hotel</th><th>Phone</th></tr></thead>
-        <tbody>
-          <tr><td>Day 1</td><td>4 Sep</td><td>Lecce</td><td>Arco Vecchio, Via Quinto Fabio Balbo 5 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce" class="map-link" target="_blank">📍</a></td><td>+39 0832 243620</td></tr>
-          <tr><td>Days 2–3</td><td>5–6 Sep</td><td>Gallipoli</td><td>Relais Corte Palmieri, Via Roncella 13 <a href="https://maps.google.com/?q=Via+Roncella+13+Gallipoli+Italy" class="map-link" target="_blank">📍</a></td><td>+39 0833 265318</td></tr>
-          <tr><td>Day 4</td><td>7 Sep</td><td>Leuca</td><td>Villa Romasi, Via Virgilio 55 <a href="https://maps.google.com/?q=Via+Virgilio+55+Leuca+Italy" class="map-link" target="_blank">📍</a></td><td>+39 335 491 602</td></tr>
-          <tr><td>Days 5–6</td><td>8–9 Sep</td><td>Otranto</td><td>Hotel San Giuseppe, Via Ottocento Martiri 60 <a href="https://maps.google.com/?q=Via+Ottocento+Martiri+60+Otranto+Italy" class="map-link" target="_blank">📍</a></td><td>+39 0836 802298</td></tr>
-          <tr><td>Day 7</td><td>10 Sep</td><td>Lecce (return)</td><td>Arco Vecchio, Via Quinto Fabio Balbo 5 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce" class="map-link" target="_blank">📍</a></td><td>+39 0832 243620</td></tr>
-        </tbody>
-      </table>
-      <div class="note-box" style="margin-top:12px;">Check-in from 4:00 PM · Check-out by 10:00 AM · Breakfast included · City tax payable on site · Call hotel 30 mins before arrival</div>
 
-      <div class="booking-card" style="margin-top:20px;">
+<div class="booking-card" style="margin-top:20px;">
         <h4>🍳 Cooking Love — Apulian Cooking Class <span class="badge badge-green">Booked</span> <span class="badge badge-red">💰 CASH €316</span></h4>
         <div class="info-grid">
           <div class="info-row-label">Date &amp; Time</div><div class="info-row-value">Friday 4 September · 6:30 PM – 10:00 PM</div>
@@ -748,6 +999,103 @@
           <div class="info-row-label">WhatsApp</div><div class="info-row-value">Full details sent via WhatsApp a few days before</div>
         </div>
       </div>
+
+      <h4 style="font-size:18px;color:var(--navy);margin:28px 0 16px;font-weight:800;border-top:2px solid var(--gold);padding-top:18px;">📅 Day-by-Day Cycling Schedule</h4>
+      <div class="note-box" style="margin-bottom:16px;">Descriptions below are based on the region — full day-by-day route details from Puglia Cycle Tours will be added when received.</div>
+      <div style="border-left:3px solid var(--gold);padding-left:16px;margin-bottom:8px;">
+
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚴 <strong>Thu 4 Sep — Day 1</strong> &nbsp;—&nbsp; Lecce</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Arrive in Lecce — the jewel of Puglia, nicknamed the 'Florence of the South' for its extraordinary baroque architecture. The old town is a treasure trove of ornate churches, palaces and piazzas, all carved from the warm golden local limestone. Explore the magnificent Piazza del Duomo, the Basilica di Santa Croce and the Roman amphitheatre at the heart of the city. This evening, attend the Cooking Love class at 6:30 PM in nearby Corigliano d'Otranto — see separate booking card.</p>
+          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
+            <strong style="color:var(--navy);font-size:14px;">🏨 Arco Vecchio, Via Quinto Fabio Balbo 5 · +39 0832 243620 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce+Italy" class="map-link" target="_blank">📍</a></strong>
+            <p style="font-size:14px;margin-top:3px;color:var(--text);">Superior Room (Double) · Check-in from 4:00 PM · Check-out Sat 6 Sep 10:00 AM</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Arrival day — settle in and explore</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Lecce</span>
+          </div>
+        </div>
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚴 <strong>Fri 5 Sep — Day 2</strong> &nbsp;—&nbsp; Lecce → Gallipoli</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Cycle through the Salento countryside towards the stunning coastal town of Gallipoli on the Ionian Sea. The name means 'beautiful city' in Greek and it lives up to it — a fortified island old town connected by a bridge to the mainland, with a magnificent baroque cathedral, a 16th-century castle and some of the best beaches in Puglia. The turquoise waters of Baia Verde beach to the south are particularly spectacular.</p>
+          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
+            <strong style="color:var(--navy);font-size:14px;">🏨 Relais Corte Palmieri, Via Roncella 13 · +39 0833 265318 <a href="https://maps.google.com/?q=Via+Roncella+13+Gallipoli+Italy" class="map-link" target="_blank">📍</a></strong>
+            <p style="font-size:14px;margin-top:3px;color:var(--text);">Classic Room (Double) · Check-in from 4:00 PM</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Cycling route to Gallipoli</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Gallipoli</span>
+          </div>
+        </div>
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚴 <strong>Sat 6 Sep — Day 3</strong> &nbsp;—&nbsp; Gallipoli (Rest Day)</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">A rest day in Gallipoli to explore at leisure. Wander the narrow streets of the historic island centro storico, visit the fish market at the port, and spend time on the beautiful beaches. The crystal-clear Ionian Sea is perfect for swimming. Try the local specialty — sea urchin pasta — at one of the excellent seafood restaurants along the waterfront.</p>
+          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
+            <strong style="color:var(--navy);font-size:14px;">🏨 Relais Corte Palmieri, Via Roncella 13 · +39 0833 265318 <a href="https://maps.google.com/?q=Via+Roncella+13+Gallipoli+Italy" class="map-link" target="_blank">📍</a></strong>
+            <p style="font-size:14px;margin-top:3px;color:var(--text);">Classic Room (Double) · Check-out Mon 7 Sep 10:00 AM</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Rest day — explore Gallipoli</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Gallipoli (Rest Day)</span>
+          </div>
+        </div>
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚴 <strong>Sun 7 Sep — Day 4</strong> &nbsp;—&nbsp; Gallipoli → Leuca</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Cycle to Santa Maria di Leuca — the very tip of Italy's heel, where the Adriatic and Ionian seas meet. This is one of the most dramatic points on the Italian peninsula. The town is crowned by the Sanctuary of Santa Maria de Finibus Terrae (Our Lady of the End of the Earth), perched on a cliff above a spectacular waterfall that cascades into the sea. A truly memorable destination.</p>
+          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
+            <strong style="color:var(--navy);font-size:14px;">🏨 Villa Romasi, Via Virgilio 55 · +39 335 491 602 <a href="https://maps.google.com/?q=Via+Virgilio+55+Leuca+Italy" class="map-link" target="_blank">📍</a></strong>
+            <p style="font-size:14px;margin-top:3px;color:var(--text);">Deluxe Room (Double) · Check-in from 4:00 PM · Check-out Mon 8 Sep 10:00 AM</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Cycling to the heel of Italy</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Leuca</span>
+          </div>
+        </div>
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚴 <strong>Mon 8 Sep — Day 5</strong> &nbsp;—&nbsp; Leuca → Otranto</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Head north along the Adriatic coastline towards Otranto — one of the most captivating towns in all of Puglia. With its brilliant white buildings, magnificent 11th-century cathedral (home to an extraordinary mosaic floor depicting the Tree of Life), imposing Aragonese castle and crystal-clear sea, Otranto is not to be missed. The town has a remarkable history as the gateway between East and West.</p>
+          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
+            <strong style="color:var(--navy);font-size:14px;">🏨 Hotel San Giuseppe, Via Ottocento Martiri 60 · +39 0836 802298 <a href="https://maps.google.com/?q=Via+Ottocento+Martiri+60+Otranto+Italy" class="map-link" target="_blank">📍</a></strong>
+            <p style="font-size:14px;margin-top:3px;color:var(--text);">Superior Room (Double) · Check-in from 4:00 PM</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Cycling the Adriatic coast</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Otranto</span>
+          </div>
+        </div>
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚴 <strong>Tue 9 Sep — Day 6</strong> &nbsp;—&nbsp; Otranto (Rest Day)</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">A rest day to fully explore Otranto. Visit the stunning Cathedral of Otranto with its famous mosaic floor — a medieval masterpiece covering the entire nave. Climb the Aragonese Castle for panoramic views over the turquoise sea. The beaches north and south of town are some of the most beautiful in Puglia, with remarkable clarity to the water. The old town walls and port are wonderful to explore on foot.</p>
+          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
+            <strong style="color:var(--navy);font-size:14px;">🏨 Hotel San Giuseppe, Via Ottocento Martiri 60 · +39 0836 802298 <a href="https://maps.google.com/?q=Via+Ottocento+Martiri+60+Otranto+Italy" class="map-link" target="_blank">📍</a></strong>
+            <p style="font-size:14px;margin-top:3px;color:var(--text);">Superior Room (Double) · Check-out Wed 10 Sep 10:00 AM</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Rest day — explore Otranto</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Otranto (Rest Day)</span>
+          </div>
+        </div>
+        <div class="booking-card" style="margin-bottom:8px;">
+          <h4>🚴 <strong>Wed 10 Sep — Day 7</strong> &nbsp;—&nbsp; Otranto → Lecce</h4>
+          <p style="font-size:15px;line-height:1.7;margin:6px 0;">The final day of the cycling tour returns to beautiful Lecce. Take a final ride through the Salento landscape — olive groves, dry stone walls and trulli — before arriving back in Lecce for a celebratory last evening. Enjoy a final dinner in one of Lecce's excellent restaurants in the magical baroque old town, lit up at night.</p>
+          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
+            <strong style="color:var(--navy);font-size:14px;">🏨 Arco Vecchio, Via Quinto Fabio Balbo 5 · +39 0832 243620 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce+Italy" class="map-link" target="_blank">📍</a></strong>
+            <p style="font-size:14px;margin-top:3px;color:var(--text);">Superior Room (Double) · Check-in from 4:00 PM · Check-out Thu 11 Sep 10:00 AM</p>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Return to Lecce — final day</span>
+            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Lecce</span>
+          </div>
+        </div>
+
+        <div class="booking-card" style="margin-bottom:8px;background:#f0f4fa;">
+          <h4>🏁 Thu 11 Sep — Check-out &amp; Transfer to Monopoli</h4>
+          <p style="font-size:15px;margin:6px 0;">Check out of Arco Vecchio by <strong>10:00 AM</strong>. Transfer to Monopoli for the next chapter of the trip — 7 nights free time in beautiful Monopoli on the Adriatic coast.</p>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </section>
@@ -758,6 +1106,7 @@
 <section id="monopoli">
   <div class="container">
     <div class="dest-header">
+      <img src="images/monopoli.jpg" alt="Monopoli" class="dest-hero-img" onerror="this.style.display='none'">
       <div class="dest-chapter">Phase VI · Puglia, Italy</div>
       <h2>Monopoli, Italy</h2>
       <div class="dest-meta">11 – 18 September 2026 &nbsp;·&nbsp; 7 Nights</div>
@@ -813,14 +1162,14 @@
       </button>
       <div id="mono-restaurants" class="collapsible-body collapsed">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:8px;">
-          <div class="booking-card"><strong>Il Piazza Palmieri</strong> <a href="https://maps.google.com/?q=Il+Piazza+Palmieri+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Outdoor eating in the square · antipasti, pasta, fresh fish. A favourite.</p></div>
-          <div class="booking-card"><strong>Osteria San Giovanni</strong> <a href="https://maps.google.com/?q=Osteria+San+Giovanni+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Traditional Puglian dishes · quiet vico, Vico Verzella</p></div>
-          <div class="booking-card"><strong>La Locanda del Porto</strong> <a href="https://maps.google.com/?q=La+Locanda+del+Porto+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Excellent antipasti &amp; seafood · reservation recommended</p></div>
-          <div class="booking-card"><strong>My Wine</strong> <a href="https://maps.google.com/?q=My+Wine+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Excellent wine &amp; food · owner ran a successful London restaurant</p></div>
-          <div class="booking-card"><strong>Seacret</strong> <a href="https://maps.google.com/?q=Seacret+Cala+Batteria+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Stylish bar/restaurant overlooking Cala Batteria</p></div>
-          <div class="booking-card"><strong>Baldovino</strong> <a href="https://maps.google.com/?q=Baldovino+Largo+San+Giovanni+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Light food &amp; fab cocktails · Largo San Giovanni · often live music</p></div>
-          <div class="booking-card"><strong>Caffé Roma (Ice Cream 🍦)</strong> <a href="https://maps.google.com/?q=Caffe+Roma+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Best gelato in Monopoli · dark chocolate &amp; perla di Puglia recommended</p></div>
-          <div class="booking-card"><strong>Lido Bianco</strong> <a href="https://maps.google.com/?q=Lido+Bianco+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">South of centro storico · long reputation for fresh fish · more pricey</p></div>
+          <div class="booking-card"><strong>Il Piazza Palmieri</strong> <a href="https://maps.google.com/?q=Il+Piazza+Palmieri+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Outdoor eating in the square · antipasti, pasta, fresh fish. A favourite.</p></div>
+          <div class="booking-card"><strong>Osteria San Giovanni</strong> <a href="https://maps.google.com/?q=Osteria+San+Giovanni+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Traditional Puglian dishes · quiet vico, Vico Verzella</p></div>
+          <div class="booking-card"><strong>La Locanda del Porto</strong> <a href="https://maps.google.com/?q=La+Locanda+del+Porto+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Excellent antipasti &amp; seafood · reservation recommended</p></div>
+          <div class="booking-card"><strong>My Wine</strong> <a href="https://maps.google.com/?q=My+Wine+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Excellent wine &amp; food · owner ran a successful London restaurant</p></div>
+          <div class="booking-card"><strong>Seacret</strong> <a href="https://maps.google.com/?q=Seacret+Cala+Batteria+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Stylish bar/restaurant overlooking Cala Batteria</p></div>
+          <div class="booking-card"><strong>Baldovino</strong> <a href="https://maps.google.com/?q=Baldovino+Largo+San+Giovanni+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Light food &amp; fab cocktails · Largo San Giovanni · often live music</p></div>
+          <div class="booking-card"><strong>Caffé Roma (Ice Cream 🍦)</strong> <a href="https://maps.google.com/?q=Caffe+Roma+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Best gelato in Monopoli · dark chocolate &amp; perla di Puglia recommended</p></div>
+          <div class="booking-card"><strong>Lido Bianco</strong> <a href="https://maps.google.com/?q=Lido+Bianco+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">South of centro storico · long reputation for fresh fish · more pricey</p></div>
         </div>
       </div>
 
@@ -829,12 +1178,12 @@
       </button>
       <div id="mono-beaches" class="collapsible-body collapsed">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:8px;">
-          <div class="booking-card"><strong>Porta Vecchia</strong> <a href="https://maps.google.com/?q=Porta+Vecchia+Beach+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Nearest beach · fine sand · crystal clear water · gets crowded in summer</p></div>
-          <div class="booking-card"><strong>Porto Bianco &amp; Porto Rosso</strong> <a href="https://maps.google.com/?q=Porto+Rosso+Beach+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Walking distance · deeper beaches · lie on grass if preferred</p></div>
-          <div class="booking-card"><strong>Lido Perla Nera</strong> <a href="https://maps.google.com/?q=Lido+Perla+Nera+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Beautiful swimming · bar/restaurant · live music evenings</p></div>
-          <div class="booking-card"><strong>Lido Cala Paradiso</strong> <a href="https://maps.google.com/?q=Lido+Cala+Paradiso+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Full facilities · tennis, volleyball, canoes · restaurant · free beach section</p></div>
-          <div class="booking-card"><strong>Porto Ghiacciolo</strong> <a href="https://maps.google.com/?q=Porto+Ghiacciolo+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Sandy cove · Abbazia Santo Stefano · public beach · bar/restaurant</p></div>
-          <div class="booking-card"><strong>Torre Guaceto</strong> <a href="https://maps.google.com/?q=Torre+Guaceto+Nature+Reserve+Brindisi" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Nature reserve ~30km towards Brindisi · stunning free sandy beach</p></div>
+          <div class="booking-card"><strong>Porta Vecchia</strong> <a href="https://maps.google.com/?q=Porta+Vecchia+Beach+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Nearest beach · fine sand · crystal clear water · gets crowded in summer</p></div>
+          <div class="booking-card"><strong>Porto Bianco &amp; Porto Rosso</strong> <a href="https://maps.google.com/?q=Porto+Rosso+Beach+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Walking distance · deeper beaches · lie on grass if preferred</p></div>
+          <div class="booking-card"><strong>Lido Perla Nera</strong> <a href="https://maps.google.com/?q=Lido+Perla+Nera+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Beautiful swimming · bar/restaurant · live music evenings</p></div>
+          <div class="booking-card"><strong>Lido Cala Paradiso</strong> <a href="https://maps.google.com/?q=Lido+Cala+Paradiso+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Full facilities · tennis, volleyball, canoes · restaurant · free beach section</p></div>
+          <div class="booking-card"><strong>Porto Ghiacciolo</strong> <a href="https://maps.google.com/?q=Porto+Ghiacciolo+Monopoli" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Sandy cove · Abbazia Santo Stefano · public beach · bar/restaurant</p></div>
+          <div class="booking-card"><strong>Torre Guaceto</strong> <a href="https://maps.google.com/?q=Torre+Guaceto+Nature+Reserve+Brindisi" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Nature reserve ~30km towards Brindisi · stunning free sandy beach</p></div>
         </div>
       </div>
 
@@ -843,12 +1192,12 @@
       </button>
       <div id="mono-daytrips" class="collapsible-body collapsed">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:8px;">
-          <div class="booking-card"><strong>Polignano a Mare</strong> <a href="https://maps.google.com/?q=Polignano+a+Mare+Italy" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">8km · train, car or bike · baroque centro storico on cliff tops · Museo Pino Pascali</p></div>
-          <div class="booking-card"><strong>White Towns — Valle d'Itria</strong> <a href="https://maps.google.com/?q=Alberobello+Trulli+Italy" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Alberobello (trulli, 30 min) · Martina Franca · Locorotondo · Cisternino · Ostuni</p></div>
-          <div class="booking-card"><strong>Lecce</strong><p style="font-size:13px;margin-top:4px;">90 min drive or train · Baroque city · beautiful centro storico · excellent restaurants</p></div>
-          <div class="booking-card"><strong>Matera</strong> <a href="https://maps.google.com/?q=Matera+Italy" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">Stunning cave city (James Bond!) · walk the ravine · best by car</p></div>
-          <div class="booking-card"><strong>Castellana Grotte / Caves</strong> <a href="https://maps.google.com/?q=Castellana+Grotte+Italy" class="map-link" target="_blank">📍</a><p style="font-size:13px;margin-top:4px;">30 min drive · fascinating caves for adults &amp; children · cool in summer</p></div>
-          <div class="booking-card"><strong>Lama degli Ulivi</strong> <a href="https://www.lamadegliulivi.it/en/" target="_blank" style="font-size:12px;color:var(--navy);">🌐 Website</a><p style="font-size:13px;margin-top:4px;">Botanical gardens · 15 min drive · ancient rock churches · book via website</p></div>
+          <div class="booking-card"><strong>Polignano a Mare</strong> <a href="https://maps.google.com/?q=Polignano+a+Mare+Italy" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">8km · train, car or bike · baroque centro storico on cliff tops · Museo Pino Pascali</p></div>
+          <div class="booking-card"><strong>White Towns — Valle d'Itria</strong> <a href="https://maps.google.com/?q=Alberobello+Trulli+Italy" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Alberobello (trulli, 30 min) · Martina Franca · Locorotondo · Cisternino · Ostuni</p></div>
+          <div class="booking-card"><strong>Lecce</strong><p style="font-size:15px;margin-top:6px;">90 min drive or train · Baroque city · beautiful centro storico · excellent restaurants</p></div>
+          <div class="booking-card"><strong>Matera</strong> <a href="https://maps.google.com/?q=Matera+Italy" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">Stunning cave city (James Bond!) · walk the ravine · best by car</p></div>
+          <div class="booking-card"><strong>Castellana Grotte / Caves</strong> <a href="https://maps.google.com/?q=Castellana+Grotte+Italy" class="map-link" target="_blank">📍</a><p style="font-size:15px;margin-top:6px;">30 min drive · fascinating caves for adults &amp; children · cool in summer</p></div>
+          <div class="booking-card"><strong>Lama degli Ulivi</strong> <a href="https://www.lamadegliulivi.it/en/" target="_blank" style="font-size:12px;color:var(--navy);">🌐 Website</a><p style="font-size:15px;margin-top:6px;">Botanical gardens · 15 min drive · ancient rock churches · book via website</p></div>
         </div>
       </div>
 
@@ -899,6 +1248,7 @@
 <section id="return">
   <div class="container">
     <div class="dest-header">
+      <img src="images/tokyo.jpg" alt="Tokyo" class="dest-hero-img" onerror="this.style.display='none'">
       <div class="dest-chapter">Phase VII · Rome · Helsinki · Tokyo · Adelaide</div>
       <h2>Return Journey</h2>
       <div class="dest-meta">18 – 22 September 2026</div>
@@ -964,76 +1314,7 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!-- ALL FLIGHTS                                                -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<section id="flights">
-  <div class="container">
-    <div class="section-label">Chapter III</div>
-    <h2 class="section-title">Complete Flight Schedule</h2>
-    <div style="overflow-x:auto;">
-    <table class="flight-table">
-      <thead><tr><th>Date</th><th>Route</th><th>Dep</th><th>Arr</th><th>Flight</th><th>Class</th><th>Seats</th><th>Ref</th></tr></thead>
-      <tbody>
-        <tr><td>Mon 10 Aug</td><td>Adelaide → Kuala Lumpur</td><td>9:45 AM</td><td>4:00 PM</td><td>MH138</td><td>Business</td><td>7D &amp; 7F</td><td>D9T6ND</td></tr>
-        <tr><td>Mon 10 Aug</td><td>Kuala Lumpur → Paris CDG</td><td>11:40 PM</td><td>6:55 AM +1</td><td>MH20</td><td>Business</td><td>3D &amp; 3F</td><td>D9T6ND</td></tr>
-        <tr><td>Tue 11 Aug</td><td>Paris CDG → Istanbul IST</td><td>11:40 AM</td><td>4:10 PM</td><td>TK (direct)</td><td>Economy</td><td>14J &amp; 14K</td><td>VX4ATE</td></tr>
-        <tr><td>Mon 17 Aug</td><td>Istanbul → Zagreb</td><td>7:30 AM</td><td>8:40 AM</td><td>TK1057</td><td>Economy</td><td>10E &amp; 10F</td><td>VQIZH4</td></tr>
-        <tr><td>Tue 1 Sep</td><td>Dubrovnik → Rome Fiumicino</td><td>10:20 AM</td><td>11:40 AM</td><td>FR6883</td><td>Economy</td><td>—</td><td>W1RY6Q</td></tr>
-        <tr><td>Sun 20 Sep</td><td>Rome Fiumicino → Helsinki</td><td>10:30 AM</td><td>2:55 PM</td><td>AY1762</td><td>Economy</td><td>9E &amp; 9D</td><td>EMI6CC</td></tr>
-        <tr><td>Sun 20 Sep</td><td>Helsinki → Tokyo Haneda</td><td>5:55 PM</td><td>1:55 PM +1</td><td>JL48</td><td>First</td><td>2D &amp; 2F</td><td>E3Q4I6</td></tr>
-        <tr><td>Tue 22 Sep</td><td>Tokyo Haneda → Sydney</td><td>6:55 AM</td><td>6:00 PM</td><td>QF26</td><td>Business</td><td>2F &amp; 2E</td><td>E5VBDD</td></tr>
-        <tr><td>Tue 22 Sep</td><td>Sydney → Adelaide</td><td>8:55 PM</td><td>10:35 PM</td><td>QF749</td><td>Business</td><td>2A &amp; 2C</td><td>E5VBDD</td></tr>
-      </tbody>
-    </table>
-    </div>
-    <div class="warn-box" style="margin-top:12px;"><strong>⚠️ Emirates Backup Rows (highlighted above)</strong> Ref: DPUXRO · AUD $3,530.74 paid · EK441 (Adelaide→Dubai) + EK123 (Dubai→Istanbul) · Business Class · A350-900 &amp; A380. Cancel before 10 August if travelling via Kuala Lumpur on Malaysia Airlines.</div>
-  </div>
-</section>
 
-<!-- ══════════════════════════════════════════════════════════ -->
-<!-- CHECKLIST                                                  -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<section id="checklist">
-  <div class="container">
-    <div class="section-label">Chapter IV</div>
-    <h2 class="section-title">Pre-Departure Checklist</h2>
-
-    <div class="booking-card">
-      <h4>📋 Before You Go</h4>
-      <ul class="checklist">
-        <li>Confirm Puglia Cycling Tour balance €2,555 paid by 4 August 2026</li>
-        <li>Cancel Emirates backup booking (DPUXRO) before 10 August</li>
-        <li>Choose and confirm Monopoli accommodation (3 options, all free cancellation)</li>
-        <li>Confirm car hire with Sergio — Rent Here Monopoli (+39 3756377809)</li>
-        <li>Ensure international driving licence available for car hire</li>
-        <li>Download GetYourGuide app — Basilica Cistern audio guide (GYG83XHLKXVQ)</li>
-        <li>Send phone number with country code to Cooking Love (Enza Pulimeno) for WhatsApp</li>
-        <li>Notify bank/cards of travel dates</li>
-        <li>Save all booking confirmations offline</li>
-        <li>Bring cash euros for Cooking Love class (€316 total / €79pp)</li>
-        <li>Pack: aqua shoes, scarf for Blue Mosque, warm layer for Croatia evenings, 2 bottles French Champagne for cruise</li>
-        <li>Bring passport to Bosnia day trip on 26 August</li>
-        <li>Bring headphones + fully charged phone for Basilica Cistern audio guide</li>
-        <li>Check free cancellation on Villa Fontaine Grand Tokyo — free until 18 Sep 23:59</li>
-      </ul>
-    </div>
-
-    <div class="booking-card" style="margin-top:16px;">
-      <h4>📞 Key Contacts</h4>
-      <table>
-        <thead><tr><th>Contact</th><th>Role</th><th>Details</th></tr></thead>
-        <tbody>
-          <tr><td>Peter Williams</td><td>Phil Hoffmann Travel</td><td>peterw@pht.com.au · +61 8 8350 5727 · 0409 826 906</td></tr>
-          <tr><td>Enza Pulimeno</td><td>Cooking Love (Puglia)</td><td>info@cookinglove.it · +39 339 235 2874</td></tr>
-          <tr><td>Sergio Ostuni</td><td>Rent Here Monopoli</td><td>rentheremonopoli@gmail.com · +39 3756377809</td></tr>
-          <tr><td>Louise Allen</td><td>Airbnb Host — Monopoli</td><td>0044 7946 609 656 · 00 39 375 727 4347</td></tr>
-          <tr><td>Puglia Cycle Tours</td><td>Cycling Tour Operator</td><td>info@pugliacycletours.com · +39 080 205 11 87</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
 
 <!-- ── Footer ─────────────────────────────────────────────── -->
 <footer>
