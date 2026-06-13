@@ -142,83 +142,114 @@
     }
     .section-subtitle { font-size: 16px; color: var(--text-lt); margin-bottom: 28px; }
 
-    /* ── Destination header ──────────────────────────────────── */
+    /* ── Destination header — cinematic full-bleed banner ───────── */
     .dest-header {
       position: relative;
       overflow: hidden;
       color: var(--white);
-      border-radius: var(--radius) var(--radius) 0 0;
-      margin-top: 36px;
-      min-height: 220px;
+      border-radius: 16px 16px 0 0;
+      margin-top: 56px;
+      height: 420px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 0;
-      background: var(--navy-dk);
+      background: #1a3a6b;
+      box-shadow: 0 8px 40px rgba(27,58,107,0.22);
     }
+    @media (max-width: 600px) {
+      .dest-header { height: 280px; margin-top: 36px; border-radius: 12px 12px 0 0; }
+    }
+
     .dest-hero-img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 40%;
+      object-position: center 35%;
       opacity: 1;
       pointer-events: none;
       display: block;
-      transition: transform 6s ease;
+      transition: transform 8s ease;
     }
     .dest-header:hover .dest-hero-img {
-      transform: scale(1.04);
+      transform: scale(1.06);
     }
-    /* Gradient overlay so text is always readable */
-    .dest-header::after {
+
+    /* Top: very faint vignette only. Bottom: light blue wash over the text area */
+    .dest-header::before {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        to bottom,
-        rgba(10, 20, 40, 0.15) 0%,
-        rgba(10, 20, 40, 0.35) 40%,
-        rgba(10, 20, 40, 0.82) 100%
+        180deg,
+        rgba(0,0,0,0.10) 0%,
+        rgba(0,0,0,0.0) 25%,
+        rgba(0,0,0,0.0) 50%,
+        rgba(27,58,107,0.45) 72%,
+        rgba(27,58,107,0.82) 100%
       );
       z-index: 1;
     }
+
+    /* Gold accent bar along the bottom edge */
+    .dest-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-lt) 50%, var(--gold) 100%);
+      z-index: 3;
+    }
+
     .dest-header-text {
       position: relative;
       z-index: 2;
-      padding: 24px 28px 22px;
+      padding: 0 36px 32px;
     }
+    @media (max-width: 600px) {
+      .dest-header-text { padding: 0 20px 24px; }
+    }
+
     .dest-header .dest-chapter {
-      font-size: 11px; color: var(--gold); font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      display: inline-block;
+      font-size: 11px;
+      color: var(--gold-lt);
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      background: rgba(27,58,107,0.35);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(201,168,76,0.5);
+      backdrop-filter: blur(6px);
     }
     .dest-header h2 {
-      font-size: clamp(24px, 4vw, 36px); font-weight: 800;
-      color: var(--white); line-height: 1.15; margin-bottom: 6px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      font-size: clamp(32px, 5.5vw, 54px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 12px rgba(0,0,30,0.5), 0 1px 3px rgba(0,0,30,0.7);
+      letter-spacing: -0.5px;
     }
     .dest-header .dest-meta {
-      font-size: 15px; color: rgba(255,255,255,.85);
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      font-size: 16px;
+      color: rgba(255,255,255,0.92);
+      text-shadow: 0 1px 6px rgba(0,0,30,0.6);
+      font-weight: 400;
+      letter-spacing: 0.3px;
     }
-    /* No-image fallback — plain navy */
-    .dest-header.no-image {
-      min-height: auto;
-      background: var(--navy);
-      padding: 22px 28px 18px;
-    }
-    .dest-header.no-image .dest-header-text { padding: 0; }
-    .dest-header.no-image::after { display: none; }
 
     .dest-body {
       background: var(--white);
       border: 1px solid var(--border);
       border-top: none;
-      border-radius: 0 0 var(--radius) var(--radius);
+      border-radius: 0 0 16px 16px;
       padding: 24px 28px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 8px 40px rgba(27,58,107,0.12);
       margin-bottom: 8px;
     }
 
@@ -331,23 +362,22 @@
     @media print {
       #site-header, #nav-toggle, #mobile-nav, #back-to-top, #dashboard { display: none !important; }
       body { font-size: 11pt; color: #000; }
-      .dest-header { min-height: auto !important; background: #1B3A6B !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .dest-header::after { display: none !important; }
+      .dest-header { height: 80px !important; background: #1B3A6B !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .dest-header::before, .dest-header::after { display: none !important; }
       .booking-card { box-shadow: none; border: 1px solid #ccc; }
       .dest-hero-img { display: none !important; }
+      .dest-header-text { padding: 16px 20px !important; }
     }
 
     /* ── Responsive ──────────────────────────────────────────── */
     @media (max-width: 600px) {
       .dest-body { padding: 16px; }
-      .dest-header { min-height: 160px; }
-      .dest-header-text { padding: 16px 16px 14px; }
       #hero { padding: 40px 16px 36px; }
       table { font-size: 12px; }
       th, td { padding: 8px 10px; }
     }
     @media (min-width: 601px) {
-      .dest-header { min-height: 240px; }
+      .dest-header { height: 420px; }
     }
   </style>
 </head>
