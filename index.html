@@ -144,15 +144,74 @@
 
     /* ── Destination header ──────────────────────────────────── */
     .dest-header {
-      background: var(--navy);
+      position: relative;
+      overflow: hidden;
       color: var(--white);
       border-radius: var(--radius) var(--radius) 0 0;
-      padding: 22px 28px 18px;
       margin-top: 36px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0;
+      background: var(--navy-dk);
     }
-    .dest-header .dest-chapter { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
-    .dest-header h2 { font-size: clamp(20px, 4vw, 30px); font-weight: 800; color: var(--white); line-height: 1.2; margin-bottom: 4px; }
-    .dest-header .dest-meta { font-size: 16px; color: rgba(255,255,255,.7); }
+    .dest-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      opacity: 1;
+      pointer-events: none;
+      display: block;
+      transition: transform 6s ease;
+    }
+    .dest-header:hover .dest-hero-img {
+      transform: scale(1.04);
+    }
+    /* Gradient overlay so text is always readable */
+    .dest-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 20, 40, 0.15) 0%,
+        rgba(10, 20, 40, 0.35) 40%,
+        rgba(10, 20, 40, 0.82) 100%
+      );
+      z-index: 1;
+    }
+    .dest-header-text {
+      position: relative;
+      z-index: 2;
+      padding: 24px 28px 22px;
+    }
+    .dest-header .dest-chapter {
+      font-size: 11px; color: var(--gold); font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+    .dest-header h2 {
+      font-size: clamp(24px, 4vw, 36px); font-weight: 800;
+      color: var(--white); line-height: 1.15; margin-bottom: 6px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .dest-header .dest-meta {
+      font-size: 15px; color: rgba(255,255,255,.85);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+    /* No-image fallback — plain navy */
+    .dest-header.no-image {
+      min-height: auto;
+      background: var(--navy);
+      padding: 22px 28px 18px;
+    }
+    .dest-header.no-image .dest-header-text { padding: 0; }
+    .dest-header.no-image::after { display: none; }
+
     .dest-body {
       background: var(--white);
       border: 1px solid var(--border);
@@ -269,45 +328,26 @@
     }
     footer strong { color: var(--gold); }
 
-    /* ── Print ───────────────────────────────────────────────── */
-    /* ── Destination hero images ─────────────────────────────── */
-    .dest-header {
-      position: relative;
-      overflow: hidden;
-    }
-    .dest-hero-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 40%;
-      opacity: 0.22;
-      pointer-events: none;
-      display: block;
-    }
-    .dest-header .dest-chapter,
-    .dest-header h2,
-    .dest-header .dest-meta {
-      position: relative;
-      z-index: 1;
-    }
-
     @media print {
       #site-header, #nav-toggle, #mobile-nav, #back-to-top, #dashboard { display: none !important; }
       body { font-size: 11pt; color: #000; }
-      .dest-header { background: #1B3A6B !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .dest-header { min-height: auto !important; background: #1B3A6B !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .dest-header::after { display: none !important; }
       .booking-card { box-shadow: none; border: 1px solid #ccc; }
-      .dest-hero-img { display: none; }
+      .dest-hero-img { display: none !important; }
     }
 
     /* ── Responsive ──────────────────────────────────────────── */
     @media (max-width: 600px) {
       .dest-body { padding: 16px; }
-      .dest-header { padding: 16px 16px 12px; }
+      .dest-header { min-height: 160px; }
+      .dest-header-text { padding: 16px 16px 14px; }
       #hero { padding: 40px 16px 36px; }
       table { font-size: 12px; }
       th, td { padding: 8px 10px; }
+    }
+    @media (min-width: 601px) {
+      .dest-header { min-height: 240px; }
     }
   </style>
 </head>
@@ -519,9 +559,11 @@
   <div class="container">
     <div class="dest-header">
       <img src="images/Istanbul.jpeg" alt="Istanbul" class="dest-hero-img" onerror="this.style.display='none'">
-      <div class="dest-chapter">Phase I · Turkey</div>
-      <h2>Istanbul, Turkey</h2>
-      <div class="dest-meta">11 – 17 August 2026 &nbsp;·&nbsp; 6 Nights &nbsp;·&nbsp; Wings Hotel Karakoy</div>
+      <div class="dest-header-text">
+        <div class="dest-chapter">Phase I · Turkey</div>
+        <h2>Istanbul, Turkey</h2>
+        <div class="dest-meta">11 – 17 August 2026 &nbsp;·&nbsp; 6 Nights &nbsp;·&nbsp; Wings Hotel Karakoy</div>
+      </div>
     </div>
     <div class="dest-body">
 
@@ -680,9 +722,11 @@
   <div class="container">
     <div class="dest-header">
       <img src="images/Zagreb.jpg" alt="Zagreb" class="dest-hero-img" onerror="this.style.display='none'">
-      <div class="dest-chapter">Phase II · Croatia</div>
-      <h2>Zagreb, Croatia</h2>
-      <div class="dest-meta">17 – 19 August 2026 &nbsp;·&nbsp; 2 Nights &nbsp;·&nbsp; Artotel Zagreb</div>
+      <div class="dest-header-text">
+        <div class="dest-chapter">Phase II · Croatia</div>
+        <h2>Zagreb, Croatia</h2>
+        <div class="dest-meta">17 – 19 August 2026 &nbsp;·&nbsp; 2 Nights &nbsp;·&nbsp; Artotel Zagreb</div>
+      </div>
     </div>
     <div class="dest-body">
       <div class="warn-box"><strong>⚠️ Early departure Istanbul</strong> TK1057 departs Istanbul 7:30 AM — leave Wings Hotel by 5:30 AM. Ref: VQIZH4 · Economy · Seats 10E (Bruce) &amp; 10F (Trudy)</div>
@@ -706,9 +750,11 @@
   <div class="container">
     <div class="dest-header">
       <img src="images/Gallipoli.jpg" alt="Croatia" class="dest-hero-img" onerror="this.style.display='none'">
-      <div class="dest-chapter">Phase III · Adriatic, Croatia</div>
-      <h2>Croatia Cruise — MV Lady Eleganza</h2>
-      <div class="dest-meta">19 August – 1 September 2026 &nbsp;·&nbsp; 13 Nights</div>
+      <div class="dest-header-text">
+        <div class="dest-chapter">Phase III · Adriatic, Croatia</div>
+        <h2>Croatia Cruise — MV Lady Eleganza</h2>
+        <div class="dest-meta">19 August – 1 September 2026 &nbsp;·&nbsp; 13 Nights</div>
+      </div>
     </div>
     <div class="dest-body">
 
@@ -890,9 +936,11 @@
   <div class="container">
     <div class="dest-header">
       <img src="images/Rome.jpg" alt="Rome" class="dest-hero-img" onerror="this.style.display='none'">
-      <div class="dest-chapter">Phase IV · Italy</div>
-      <h2>Rome, Italy</h2>
-      <div class="dest-meta">1 – 3 September 2026 &nbsp;·&nbsp; 2 Nights &nbsp;·&nbsp; The Republic Hotel</div>
+      <div class="dest-header-text">
+        <div class="dest-chapter">Phase IV · Italy</div>
+        <h2>Rome, Italy</h2>
+        <div class="dest-meta">1 – 3 September 2026 &nbsp;·&nbsp; 2 Nights &nbsp;·&nbsp; The Republic Hotel</div>
+      </div>
     </div>
     <div class="dest-body">
       <div class="booking-card">
@@ -950,9 +998,11 @@
   <div class="container">
     <div class="dest-header">
       <img src="images/Lecce.jpg" alt="Lecce" class="dest-hero-img" onerror="this.style.display='none'">
-      <div class="dest-chapter">Phase IV (cont.) · Italy</div>
-      <h2>Lecce, Italy — Arrival Night</h2>
-      <div class="dest-meta">3 September 2026 &nbsp;·&nbsp; 1 Night &nbsp;·&nbsp; Arco Vecchio</div>
+      <div class="dest-header-text">
+        <div class="dest-chapter">Phase IV (cont.) · Italy</div>
+        <h2>Lecce, Italy — Arrival Night</h2>
+        <div class="dest-meta">3 September 2026 &nbsp;·&nbsp; 1 Night &nbsp;·&nbsp; Arco Vecchio</div>
+      </div>
     </div>
     <div class="dest-body">
       <div class="note-box">Arriving Lecce on the Frecciargento at 14:20 — one night before the Puglia Cycling Tour begins on 4 September. Same hotel as booked by Puglia Cycle Tours for Day 1.</div>
@@ -980,9 +1030,11 @@
   <div class="container">
     <div class="dest-header">
       <img src="images/Otranto.jpeg" alt="Puglia" class="dest-hero-img" onerror="this.style.display='none'">
-      <div class="dest-chapter">Phase V · Italy</div>
-      <h2>Puglia, Italy</h2>
-      <div class="dest-meta">4 – 10 September 2026 &nbsp;·&nbsp; 7 Days &nbsp;·&nbsp; Salento Bike &amp; Beach Cycling Tour</div>
+      <div class="dest-header-text">
+        <div class="dest-chapter">Phase V · Italy</div>
+        <h2>Puglia, Italy</h2>
+        <div class="dest-meta">4 – 10 September 2026 &nbsp;·&nbsp; 7 Days &nbsp;·&nbsp; Salento Bike &amp; Beach Cycling Tour</div>
+      </div>
     </div>
     <div class="dest-body">
       <div class="note-box" style="margin-bottom:16px;">The evening of 4 September includes a separate booked cooking class — independent of the cycling tour.</div>
@@ -1107,9 +1159,11 @@
   <div class="container">
     <div class="dest-header">
       <img src="images/Monopoli.jpeg" alt="Monopoli" class="dest-hero-img" onerror="this.style.display='none'">
-      <div class="dest-chapter">Phase VI · Puglia, Italy</div>
-      <h2>Monopoli, Italy</h2>
-      <div class="dest-meta">11 – 18 September 2026 &nbsp;·&nbsp; 7 Nights</div>
+      <div class="dest-header-text">
+        <div class="dest-chapter">Phase VI · Puglia, Italy</div>
+        <h2>Monopoli, Italy</h2>
+        <div class="dest-meta">11 – 18 September 2026 &nbsp;·&nbsp; 7 Nights</div>
+      </div>
     </div>
     <div class="dest-body">
 
@@ -1249,9 +1303,11 @@
   <div class="container">
     <div class="dest-header">
       <img src="images/tokyo.jpg" alt="Tokyo" class="dest-hero-img" onerror="this.style.display='none'">
-      <div class="dest-chapter">Phase VII · Rome · Helsinki · Tokyo · Adelaide</div>
-      <h2>Return Journey</h2>
-      <div class="dest-meta">18 – 22 September 2026</div>
+      <div class="dest-header-text">
+        <div class="dest-chapter">Phase VII · Rome · Helsinki · Tokyo · Adelaide</div>
+        <h2>Return Journey</h2>
+        <div class="dest-meta">18 – 22 September 2026</div>
+      </div>
     </div>
     <div class="dest-body">
       <div class="booking-card">
