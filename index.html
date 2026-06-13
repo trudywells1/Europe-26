@@ -10,6 +10,9 @@
   <meta name="theme-color" content="#1B3A6B">
   <link rel="apple-touch-icon" href="images/icon-192.png">
   <title>Wells Europe 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ── Reset & Base ───────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,10 +32,14 @@
       --radius:  10px;
       --shadow:  0 2px 12px rgba(27,58,107,0.10);
       --shadow-lg: 0 6px 28px rgba(27,58,107,0.16);
-      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --font: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
     }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body { font-family: var(--font); color: var(--text); background: var(--off-wh); line-height: 1.7; font-size: 16px; }
+    /* Magazine serif for all major headings */
+    h1, h2, h3, .section-title { font-family: var(--font-serif); }
+    .booking-card h4 { font-family: var(--font-serif); font-size: 19px; letter-spacing: 0; }
     a { color: var(--navy); text-decoration: none; }
     a:hover { text-decoration: underline; color: var(--gold); }
     img { max-width: 100%; height: auto; display: block; }
@@ -86,29 +93,136 @@
       #nav-toggle { display: block; }
     }
 
-    /* ── Hero ───────────────────────────────────────────────── */
+    /* ── Hero — full-bleed cover photo ─────────────────────────── */
     #hero {
-      background: linear-gradient(160deg, var(--navy-dk) 0%, var(--navy) 60%, #2a5298 100%);
+      position: relative;
+      overflow: hidden;
       color: var(--white);
-      padding: 56px 24px 48px;
       text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 120px 24px 80px;
     }
-    #hero .eyebrow { color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
-    #hero h1 { font-size: clamp(28px, 6vw, 52px); font-weight: 800; line-height: 1.15; margin-bottom: 10px; }
+    #hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 55%;
+      z-index: 0;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,20,0.55) 0%,
+        rgba(0,0,20,0.25) 35%,
+        rgba(0,0,20,0.25) 60%,
+        rgba(0,0,20,0.75) 100%
+      );
+      z-index: 1;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
+      z-index: 2;
+    }
+    #hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      width: 100%;
+    }
+    #hero .eyebrow {
+      display: inline-block;
+      color: var(--gold-lt);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      background: rgba(0,0,20,0.3);
+      padding: 6px 18px;
+      border-radius: 30px;
+      border: 1px solid rgba(201,168,76,0.45);
+      backdrop-filter: blur(8px);
+    }
+    #hero h1 {
+      font-size: clamp(52px, 10vw, 100px);
+      font-weight: 800;
+      line-height: 1.0;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    }
     #hero h1 em { color: var(--gold); font-style: normal; }
-    #hero .subtitle { color: rgba(255,255,255,.75); font-size: 16px; margin-bottom: 32px; }
-    .stats-row { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
-    .stat { text-align: center; }
-    .stat-num { font-size: 36px; font-weight: 800; color: var(--gold); line-height: 1; }
-    .stat-lbl { font-size: 12px; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
-
-    /* ── Countdown ──────────────────────────────────────────── */
-    #countdown { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-    .cd-unit { text-align: center; background: rgba(255,255,255,.08); border-radius: var(--radius); padding: 12px 16px; min-width: 72px; }
-    .cd-num { font-size: 32px; font-weight: 800; color: var(--gold); line-height: 1; display: block; }
-    .cd-lbl { font-size: 11px; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
+    #hero .subtitle {
+      color: rgba(255,255,255,.88);
+      font-size: clamp(15px, 2.5vw, 19px);
+      margin-bottom: 48px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      letter-spacing: 0.3px;
+    }
+    #countdown { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+    .cd-unit {
+      text-align: center;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      min-width: 80px;
+      backdrop-filter: blur(8px);
+    }
+    .cd-num { font-size: 38px; font-weight: 800; color: var(--gold); line-height: 1; display: block; }
+    .cd-lbl { font-size: 11px; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
     .cd-live { font-size: 20px; font-weight: 700; color: var(--gold); }
-    .route { font-size: 13px; color: rgba(255,255,255,.5); margin-top: 20px; letter-spacing: .3px; }
+    .stats-row {
+      display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+      background: rgba(0,0,20,0.35);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .stat {
+      text-align: center;
+      padding: 20px 28px;
+      border-right: 1px solid rgba(255,255,255,.12);
+      flex: 1;
+      min-width: 100px;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-size: 38px; font-weight: 800; color: var(--gold); line-height: 1; }
+    .stat-lbl { font-size: 11px; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+    .route { font-size: 13px; color: rgba(255,255,255,.55); margin-top: 20px; letter-spacing: .5px; line-height: 1.8; }
+    .hero-scroll-cue {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 2; color: rgba(255,255,255,.45); font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .hero-scroll-cue::after { content: '↓'; font-size: 18px; animation: bounce 2s infinite; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); opacity: .45; }
+      50% { transform: translateY(6px); opacity: .9; }
+    }
+    @media (max-width: 600px) {
+      #hero { min-height: 100svh; padding: 100px 16px 70px; }
+      .stat { padding: 14px 16px; }
+      .stat-num { font-size: 28px; }
+      .cd-unit { min-width: 62px; padding: 12px 10px; }
+      .cd-num { font-size: 28px; }
+    }
 
     /* ── Status Dashboard ───────────────────────────────────── */
     #dashboard {
@@ -328,6 +442,193 @@
       border-top: 1px solid var(--border); margin-top: 36px;
     }
 
+
+    /* ── Puglia town photo strip ─────────────────────────────── */
+    .puglia-photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 28px 0 32px;
+      height: 340px;
+      box-shadow: 0 8px 32px rgba(27,58,107,0.2);
+    }
+    @media (max-width: 640px) {
+      .puglia-photo-strip { grid-template-columns: 1fr; height: auto; }
+      .puglia-photo-strip .strip-panel { height: 220px; }
+    }
+    .strip-panel {
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+    .strip-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 7s ease;
+      display: block;
+    }
+    .strip-panel:hover img { transform: scale(1.08); }
+    .strip-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0) 40%,
+        rgba(15,30,60,0.75) 100%
+      );
+    }
+    .strip-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: 16px 18px;
+    }
+    .strip-label-town {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      line-height: 1.1;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .strip-label-day {
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      display: block;
+      margin-top: 3px;
+    }
+    /* Strip divider lines between panels */
+    .strip-panel:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 2px;
+      height: 100%;
+      background: rgba(201,168,76,0.5);
+      z-index: 3;
+    }
+
+    /* ── Cycling day card — magazine style ───────────────────── */
+    .cycling-day-card {
+      margin-bottom: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(27,58,107,0.10);
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+    @media (max-width: 700px) {
+      .cycling-day-card { grid-template-columns: 1fr; }
+      .cycling-day-photo { height: 200px !important; }
+    }
+    .cycling-day-photo {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      min-height: 220px;
+    }
+    .cycling-day-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 7s ease;
+    }
+    .cycling-day-card:hover .cycling-day-photo img { transform: scale(1.07); }
+    .cycling-day-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(27,58,107,0.3) 0%, rgba(0,0,0,0) 60%);
+    }
+    .cycling-day-photo-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(201,168,76,0.5);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      backdrop-filter: blur(4px);
+    }
+    .cycling-day-content {
+      padding: 20px 22px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .cycling-day-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .cycling-day-num {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .cycling-day-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .cycling-day-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #444;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .cycling-day-hotel {
+      background: var(--blue-lt);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+    .cycling-day-hotel strong { color: var(--navy); font-size: 13px; }
+    .cycling-day-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .cycling-day-tag {
+      font-size: 12px;
+      background: var(--blue-lt);
+      color: var(--navy);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    /* No-photo card falls back to plain booking-card style */
+    .cycling-day-card.no-photo { grid-template-columns: 1fr; }
+
+
     /* ── Back to top ─────────────────────────────────────────── */
     #back-to-top {
       position: fixed; bottom: 24px; right: 20px; z-index: 50;
@@ -417,26 +718,30 @@
 
 <!-- ── Hero ───────────────────────────────────────────────── -->
 <section id="hero">
-  <div class="eyebrow">Bruce &amp; Trudy Wells</div>
-  <h1>Europe <em>2026</em></h1>
-  <p class="subtitle">10 August – 22 September 2026 &nbsp;·&nbsp; Adelaide to the World</p>
+  <img id="hero-bg" src="images/Europe_Photo.jpeg" alt="Europe 2026" onerror="this.style.display='none'">
+  <div id="hero-content">
+    <div class="eyebrow">Bruce &amp; Trudy Wells</div>
+    <h1>Europe <em>2026</em></h1>
+    <p class="subtitle">10 August – 22 September 2026 &nbsp;·&nbsp; Adelaide to the World</p>
 
-  <p style="color:rgba(255,255,255,.6);font-size:13px;margin-bottom:16px;">⏱ Countdown to departure from Adelaide</p>
-  <div id="countdown">
-    <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><div class="cd-lbl">Days</div></div>
-    <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><div class="cd-lbl">Hours</div></div>
-    <div class="cd-unit"><span class="cd-num" id="cd-minutes">--</span><div class="cd-lbl">Mins</div></div>
-    <div class="cd-unit"><span class="cd-num" id="cd-seconds">--</span><div class="cd-lbl">Secs</div></div>
+    <p style="color:rgba(255,255,255,.55);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;">Countdown to Departure</p>
+    <div id="countdown">
+      <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><div class="cd-lbl">Days</div></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><div class="cd-lbl">Hours</div></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-minutes">--</span><div class="cd-lbl">Mins</div></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-seconds">--</span><div class="cd-lbl">Secs</div></div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">44</div><div class="stat-lbl">Days</div></div>
+      <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">Countries</div></div>
+      <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Destinations</div></div>
+      <div class="stat"><div class="stat-num">13</div><div class="stat-lbl">Nights at Sea</div></div>
+    </div>
+
+    <div class="route">Adelaide → Kuala Lumpur → Paris → Istanbul → Zagreb → Croatia Cruise → Rome → Puglia → Monopoli → Rome → Helsinki → Tokyo → Sydney → Adelaide</div>
   </div>
-
-  <div class="stats-row" style="margin-top:28px;">
-    <div class="stat"><div class="stat-num">44</div><div class="stat-lbl">Days of Travel</div></div>
-    <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">Countries</div></div>
-    <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Destinations</div></div>
-    <div class="stat"><div class="stat-num">13</div><div class="stat-lbl">Nights at Sea</div></div>
-  </div>
-
-  <div class="route">Adelaide → Kuala Lumpur → Paris → Istanbul → Zagreb → Croatia Cruise → Rome → Puglia → Monopoli → Rome → Helsinki → Tokyo → Sydney → Adelaide</div>
+  <div class="hero-scroll-cue">Scroll to explore</div>
 </section>
 
 <!-- ── Status Dashboard ───────────────────────────────────── -->
@@ -1082,68 +1387,117 @@
         </div>
       </div>
 
-      <h4 style="font-size:18px;color:var(--navy);margin:28px 0 16px;font-weight:800;border-top:2px solid var(--gold);padding-top:18px;">📅 Day-by-Day Cycling Schedule</h4>
-      <div class="note-box" style="margin-bottom:16px;">Descriptions below are based on the region — full day-by-day route details from Puglia Cycle Tours will be added when received.</div>
-      <div style="border-left:3px solid var(--gold);padding-left:16px;margin-bottom:8px;">
+      <!-- ── CYCLING PHOTO STRIP ── -->
+      <div style="border-top:2px solid var(--gold);padding-top:24px;margin:28px 0 0;">
+        <p style="font-family:var(--font-serif);font-size:28px;font-weight:700;color:var(--navy);margin-bottom:4px;">Day-by-Day Cycling Schedule</p>
+        <p style="font-size:13px;color:var(--text-lt);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;">Salento Bike &amp; Beach · 7 Days · Puglia, Italy</p>
+      </div>
+      <div class="note-box" style="margin-bottom:20px;">Descriptions below are based on the region — full day-by-day route details from Puglia Cycle Tours will be added when received.</div>
 
-        <div class="booking-card" style="margin-bottom:8px;">
-          <h4>🚴 <strong>Thu 4 Sep — Day 1</strong> &nbsp;—&nbsp; Lecce</h4>
-          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Arrive in Lecce — the jewel of Puglia, nicknamed the 'Florence of the South' for its extraordinary baroque architecture. The old town is a treasure trove of ornate churches, palaces and piazzas, all carved from the warm golden local limestone. Explore the magnificent Piazza del Duomo, the Basilica di Santa Croce and the Roman amphitheatre at the heart of the city. This evening, attend the Cooking Love class at 6:30 PM in nearby Corigliano d'Otranto — see separate booking card.</p>
-          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
-            <strong style="color:var(--navy);font-size:14px;">🏨 Arco Vecchio, Via Quinto Fabio Balbo 5 · +39 0832 243620 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce+Italy" class="map-link" target="_blank">📍</a></strong>
-            <p style="font-size:14px;margin-top:3px;color:var(--text);">Superior Room (Double) · Check-in from 4:00 PM · Check-out Sat 6 Sep 10:00 AM</p>
-          </div>
-          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Arrival day — settle in and explore</span>
-            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Lecce</span>
+      <!-- Three-panel photo strip: Gallipoli · Leuca · Otranto -->
+      <div class="puglia-photo-strip">
+        <div class="strip-panel">
+          <img src="images/Gallipoli.jpg" alt="Gallipoli" onerror="this.parentElement.style.background='var(--navy)'">
+          <div class="strip-label">
+            <span class="strip-label-day">Days 2 &amp; 3 · Ionian Sea</span>
+            <span class="strip-label-town">Gallipoli</span>
           </div>
         </div>
-        <div class="booking-card" style="margin-bottom:8px;">
-          <h4>🚴 <strong>Fri 5 Sep — Day 2</strong> &nbsp;—&nbsp; Lecce → Gallipoli</h4>
-          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Cycle through the Salento countryside towards the stunning coastal town of Gallipoli on the Ionian Sea. The name means 'beautiful city' in Greek and it lives up to it — a fortified island old town connected by a bridge to the mainland, with a magnificent baroque cathedral, a 16th-century castle and some of the best beaches in Puglia. The turquoise waters of Baia Verde beach to the south are particularly spectacular.</p>
-          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
-            <strong style="color:var(--navy);font-size:14px;">🏨 Relais Corte Palmieri, Via Roncella 13 · +39 0833 265318 <a href="https://maps.google.com/?q=Via+Roncella+13+Gallipoli+Italy" class="map-link" target="_blank">📍</a></strong>
-            <p style="font-size:14px;margin-top:3px;color:var(--text);">Classic Room (Double) · Check-in from 4:00 PM</p>
-          </div>
-          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Cycling route to Gallipoli</span>
-            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Gallipoli</span>
+        <div class="strip-panel">
+          <img src="images/Leuca.jpeg" alt="Leuca" onerror="this.parentElement.style.background='var(--navy)'">
+          <div class="strip-label">
+            <span class="strip-label-day">Day 4 · The Heel of Italy</span>
+            <span class="strip-label-town">Santa Maria di Leuca</span>
           </div>
         </div>
-        <div class="booking-card" style="margin-bottom:8px;">
-          <h4>🚴 <strong>Sat 6 Sep — Day 3</strong> &nbsp;—&nbsp; Gallipoli (Rest Day)</h4>
-          <p style="font-size:15px;line-height:1.7;margin:6px 0;">A rest day in Gallipoli to explore at leisure. Wander the narrow streets of the historic island centro storico, visit the fish market at the port, and spend time on the beautiful beaches. The crystal-clear Ionian Sea is perfect for swimming. Try the local specialty — sea urchin pasta — at one of the excellent seafood restaurants along the waterfront.</p>
-          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
-            <strong style="color:var(--navy);font-size:14px;">🏨 Relais Corte Palmieri, Via Roncella 13 · +39 0833 265318 <a href="https://maps.google.com/?q=Via+Roncella+13+Gallipoli+Italy" class="map-link" target="_blank">📍</a></strong>
-            <p style="font-size:14px;margin-top:3px;color:var(--text);">Classic Room (Double) · Check-out Mon 7 Sep 10:00 AM</p>
-          </div>
-          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Rest day — explore Gallipoli</span>
-            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Gallipoli (Rest Day)</span>
+        <div class="strip-panel">
+          <img src="images/Otranto.jpeg" alt="Otranto" onerror="this.parentElement.style.background='var(--navy)'">
+          <div class="strip-label">
+            <span class="strip-label-day">Days 5 &amp; 6 · Adriatic Coast</span>
+            <span class="strip-label-town">Otranto</span>
           </div>
         </div>
-        <div class="booking-card" style="margin-bottom:8px;">
-          <h4>🚴 <strong>Sun 7 Sep — Day 4</strong> &nbsp;—&nbsp; Gallipoli → Leuca</h4>
-          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Cycle to Santa Maria di Leuca — the very tip of Italy's heel, where the Adriatic and Ionian seas meet. This is one of the most dramatic points on the Italian peninsula. The town is crowned by the Sanctuary of Santa Maria de Finibus Terrae (Our Lady of the End of the Earth), perched on a cliff above a spectacular waterfall that cascades into the sea. A truly memorable destination.</p>
-          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
-            <strong style="color:var(--navy);font-size:14px;">🏨 Villa Romasi, Via Virgilio 55 · +39 335 491 602 <a href="https://maps.google.com/?q=Via+Virgilio+55+Leuca+Italy" class="map-link" target="_blank">📍</a></strong>
-            <p style="font-size:14px;margin-top:3px;color:var(--text);">Deluxe Room (Double) · Check-in from 4:00 PM · Check-out Mon 8 Sep 10:00 AM</p>
-          </div>
-          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Cycling to the heel of Italy</span>
-            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Leuca</span>
+      </div>
+
+      <!-- Day cards -->
+      <div style="margin-top:24px;">
+
+        <!-- Day 1 — Lecce (no town photo, plain card) -->
+        <div class="cycling-day-card no-photo" style="display:block;">
+          <div class="cycling-day-content" style="padding:20px 22px;">
+            <div class="cycling-day-header">
+              <span class="cycling-day-num">Thu 4 Sep &nbsp;·&nbsp; Day 1</span>
+              <span class="cycling-day-title">Lecce — Arrival</span>
+            </div>
+            <p class="cycling-day-body">Arrive in Lecce — the jewel of Puglia, nicknamed the 'Florence of the South' for its extraordinary baroque architecture. The old town is a treasure trove of ornate churches, palaces and piazzas, all carved from warm golden local limestone. Explore the magnificent Piazza del Duomo, the Basilica di Santa Croce and the Roman amphitheatre. This evening, attend the Cooking Love class at 6:30 PM in nearby Corigliano d'Otranto — see booking card above.</p>
+            <div class="cycling-day-hotel">
+              <strong>🏨 Arco Vecchio, Via Quinto Fabio Balbo 5 · +39 0832 243620 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce+Italy" class="map-link" target="_blank">📍</a></strong>
+              <p style="margin-top:3px;color:var(--text);">Superior Room (Double) · Check-in from 4:00 PM · Check-out Sat 6 Sep 10:00 AM</p>
+            </div>
+            <div class="cycling-day-tags"><span class="cycling-day-tag">🚴 Arrival day</span><span class="cycling-day-tag">🌙 Overnight: Lecce</span></div>
           </div>
         </div>
-        <div class="booking-card" style="margin-bottom:8px;">
-          <h4>🚴 <strong>Mon 8 Sep — Day 5</strong> &nbsp;—&nbsp; Leuca → Otranto</h4>
-          <p style="font-size:15px;line-height:1.7;margin:6px 0;">Head north along the Adriatic coastline towards Otranto — one of the most captivating towns in all of Puglia. With its brilliant white buildings, magnificent 11th-century cathedral (home to an extraordinary mosaic floor depicting the Tree of Life), imposing Aragonese castle and crystal-clear sea, Otranto is not to be missed. The town has a remarkable history as the gateway between East and West.</p>
-          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
-            <strong style="color:var(--navy);font-size:14px;">🏨 Hotel San Giuseppe, Via Ottocento Martiri 60 · +39 0836 802298 <a href="https://maps.google.com/?q=Via+Ottocento+Martiri+60+Otranto+Italy" class="map-link" target="_blank">📍</a></strong>
-            <p style="font-size:14px;margin-top:3px;color:var(--text);">Superior Room (Double) · Check-in from 4:00 PM</p>
+
+        <!-- Days 2 & 3 — Gallipoli (with photo) -->
+        <div class="cycling-day-card">
+          <div class="cycling-day-photo">
+            <img src="images/Gallipoli.jpg" alt="Gallipoli harbour" onerror="this.parentElement.style.background='var(--navy-dk)'">
+            <div class="cycling-day-photo-overlay"></div>
+            <div class="cycling-day-photo-badge">Days 2 &amp; 3</div>
           </div>
-          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Cycling the Adriatic coast</span>
-            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Otranto</span>
+          <div class="cycling-day-content">
+            <div class="cycling-day-header">
+              <span class="cycling-day-num">Fri–Sat 5–6 Sep</span>
+              <span class="cycling-day-title">Gallipoli</span>
+            </div>
+            <p class="cycling-day-body">Cycle through the Salento countryside to Gallipoli on the Ionian Sea — a fortified island old town connected by a bridge to the mainland, with a magnificent baroque cathedral, a 16th-century castle and some of the best beaches in Puglia. Day 3 is a rest day to explore at leisure, swim in the crystal-clear Ionian Sea, and try the local specialty: sea urchin pasta on the waterfront.</p>
+            <div class="cycling-day-hotel">
+              <strong>🏨 Relais Corte Palmieri, Via Roncella 13 · +39 0833 265318 <a href="https://maps.google.com/?q=Via+Roncella+13+Gallipoli+Italy" class="map-link" target="_blank">📍</a></strong>
+              <p style="margin-top:3px;color:var(--text);">Classic Room (Double) · 2 nights · Check-out Mon 7 Sep 10:00 AM</p>
+            </div>
+            <div class="cycling-day-tags"><span class="cycling-day-tag">🚴 Cycling + Rest Day</span><span class="cycling-day-tag">🌙 2 Nights: Gallipoli</span></div>
+          </div>
+        </div>
+
+        <!-- Day 4 — Leuca (with photo) -->
+        <div class="cycling-day-card">
+          <div class="cycling-day-photo">
+            <img src="images/Leuca.jpeg" alt="Santa Maria di Leuca" onerror="this.parentElement.style.background='var(--navy-dk)'">
+            <div class="cycling-day-photo-overlay"></div>
+            <div class="cycling-day-photo-badge">Day 4</div>
+          </div>
+          <div class="cycling-day-content">
+            <div class="cycling-day-header">
+              <span class="cycling-day-num">Sun 7 Sep</span>
+              <span class="cycling-day-title">Santa Maria di Leuca</span>
+            </div>
+            <p class="cycling-day-body">Cycle to the very tip of Italy's heel, where the Adriatic and Ionian seas meet. The town is crowned by the Sanctuary of Santa Maria de Finibus Terrae — Our Lady of the End of the Earth — perched on a cliff above a spectacular waterfall that cascades into the sea. One of the most dramatic points on the entire Italian peninsula.</p>
+            <div class="cycling-day-hotel">
+              <strong>🏨 Villa Romasi, Via Virgilio 55 · +39 335 491 602 <a href="https://maps.google.com/?q=Via+Virgilio+55+Leuca+Italy" class="map-link" target="_blank">📍</a></strong>
+              <p style="margin-top:3px;color:var(--text);">Deluxe Room (Double) · Check-in 4:00 PM · Check-out Mon 8 Sep 10:00 AM</p>
+            </div>
+            <div class="cycling-day-tags"><span class="cycling-day-tag">🚴 Cycling to the heel</span><span class="cycling-day-tag">🌙 Overnight: Leuca</span></div>
+          </div>
+        </div>
+
+        <!-- Days 5 & 6 — Otranto (with photo) -->
+        <div class="cycling-day-card">
+          <div class="cycling-day-photo">
+            <img src="images/Otranto.jpeg" alt="Otranto" onerror="this.parentElement.style.background='var(--navy-dk)'">
+            <div class="cycling-day-photo-overlay"></div>
+            <div class="cycling-day-photo-badge">Days 5 &amp; 6</div>
+          </div>
+          <div class="cycling-day-content">
+            <div class="cycling-day-header">
+              <span class="cycling-day-num">Mon–Tue 8–9 Sep</span>
+              <span class="cycling-day-title">Otranto</span>
+            </div>
+            <p class="cycling-day-body">Head north along the Adriatic coast to Otranto — one of the most captivating towns in all of Puglia. Its brilliant white buildings, magnificent 11th-century cathedral with a famous mosaic floor depicting the Tree of Life, imposing Aragonese castle and crystal-clear turquoise sea are not to be missed. Day 6 is a rest day: climb the castle walls for panoramic views, walk the old town and swim in some of Puglia's most beautiful beaches.</p>
+            <div class="cycling-day-hotel">
+              <strong>🏨 Hotel San Giuseppe, Via Ottocento Martiri 60 · +39 0836 802298 <a href="https://maps.google.com/?q=Via+Ottocento+Martiri+60+Otranto+Italy" class="map-link" target="_blank">📍</a></strong>
+              <p style="margin-top:3px;color:var(--text);">Superior Room (Double) · 2 nights · Check-out Wed 10 Sep 10:00 AM</p>
+            </div>
+            <div class="cycling-day-tags"><span class="cycling-day-tag">🚴 Cycling + Rest Day</span><span class="cycling-day-tag">🌙 2 Nights: Otranto</span></div>
           </div>
         </div>
         <div class="booking-card" style="margin-bottom:8px;">
@@ -1158,22 +1512,31 @@
             <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Otranto (Rest Day)</span>
           </div>
         </div>
-        <div class="booking-card" style="margin-bottom:8px;">
-          <h4>🚴 <strong>Wed 10 Sep — Day 7</strong> &nbsp;—&nbsp; Otranto → Lecce</h4>
-          <p style="font-size:15px;line-height:1.7;margin:6px 0;">The final day of the cycling tour returns to beautiful Lecce. Take a final ride through the Salento landscape — olive groves, dry stone walls and trulli — before arriving back in Lecce for a celebratory last evening. Enjoy a final dinner in one of Lecce's excellent restaurants in the magical baroque old town, lit up at night.</p>
-          <div style="margin:10px 0;padding:10px 14px;background:var(--blue-lt);border-radius:8px;">
-            <strong style="color:var(--navy);font-size:14px;">🏨 Arco Vecchio, Via Quinto Fabio Balbo 5 · +39 0832 243620 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce+Italy" class="map-link" target="_blank">📍</a></strong>
-            <p style="font-size:14px;margin-top:3px;color:var(--text);">Superior Room (Double) · Check-in from 4:00 PM · Check-out Thu 11 Sep 10:00 AM</p>
-          </div>
-          <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
-            <span style="font-size:13px;background:var(--blue-lt);color:var(--navy);padding:4px 10px;border-radius:6px;font-weight:600;">🚴 Return to Lecce — final day</span>
-            <span style="font-size:13px;background:#f0f4fa;color:var(--navy);padding:4px 10px;border-radius:6px;">🌙 Overnight: Lecce</span>
+        <!-- Day 7 — Return to Lecce -->
+        <div class="cycling-day-card no-photo" style="display:block;">
+          <div class="cycling-day-content">
+            <div class="cycling-day-header">
+              <span class="cycling-day-num">Wed 10 Sep &nbsp;·&nbsp; Day 7</span>
+              <span class="cycling-day-title">Otranto → Lecce — La Fine</span>
+            </div>
+            <p class="cycling-day-body">The final day of the cycling tour returns to beautiful Lecce. Take a last ride through the Salento landscape — olive groves, dry stone walls and trulli — before arriving back in the baroque old town for a celebratory dinner. The streets of Lecce glow golden at night, a perfect farewell to one of Italy's most extraordinary regions.</p>
+            <div class="cycling-day-hotel">
+              <strong>🏨 Arco Vecchio, Via Quinto Fabio Balbo 5 · +39 0832 243620 <a href="https://maps.google.com/?q=Via+Quinto+Fabio+Balbo+5+Lecce+Italy" class="map-link" target="_blank">📍</a></strong>
+              <p style="margin-top:3px;color:var(--text);">Superior Room (Double) · Check-in 4:00 PM · Check-out Thu 11 Sep 10:00 AM</p>
+            </div>
+            <div class="cycling-day-tags"><span class="cycling-day-tag">🚴 Final riding day</span><span class="cycling-day-tag">🌙 Overnight: Lecce</span></div>
           </div>
         </div>
 
-        <div class="booking-card" style="margin-bottom:8px;background:#f0f4fa;">
-          <h4>🏁 Thu 11 Sep — Check-out &amp; Transfer to Monopoli</h4>
-          <p style="font-size:15px;margin:6px 0;">Check out of Arco Vecchio by <strong>10:00 AM</strong>. Transfer to Monopoli for the next chapter of the trip — 7 nights free time in beautiful Monopoli on the Adriatic coast.</p>
+        <!-- Checkout -->
+        <div class="cycling-day-card no-photo" style="display:block;background:linear-gradient(135deg,#f0f4fa,#e8f0f7);">
+          <div class="cycling-day-content" style="background:transparent;">
+            <div class="cycling-day-header">
+              <span class="cycling-day-num">Thu 11 Sep</span>
+              <span class="cycling-day-title">🏁 Check-out &amp; Transfer to Monopoli</span>
+            </div>
+            <p class="cycling-day-body">Check out of Arco Vecchio by <strong>10:00 AM</strong>. Transfer to Monopoli for the next chapter of the adventure — 7 nights of free time on the beautiful Adriatic coast.</p>
+          </div>
         </div>
 
       </div>
@@ -1332,7 +1695,7 @@
 <section id="return">
   <div class="container">
     <div class="dest-header">
-      <img src="images/tokyo.jpg" alt="Tokyo" class="dest-hero-img" onerror="this.style.display='none'">
+      <img src="images/Tokyo.jpeg" alt="Tokyo" class="dest-hero-img" onerror="this.style.display='none'">
       <div class="dest-header-text">
         <div class="dest-chapter">Phase VII · Rome · Helsinki · Tokyo · Adelaide</div>
         <h2>Return Journey</h2>
