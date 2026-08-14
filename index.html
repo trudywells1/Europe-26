@@ -2488,7 +2488,11 @@ function updateCountdown() {
 
   if (diff <= 0) {
     const el = document.getElementById('countdown');
-    if (el) el.innerHTML = '<span class="cd-live">✈️ Trip is underway!</span>';
+    if (el) {
+      const seg = (typeof getTodaySegment === 'function') ? getTodaySegment() : null;
+      const label = seg ? seg.text : '✈️ Trip is underway!';
+      el.innerHTML = `<span class="cd-live">${label}</span>`;
+    }
     return;
   }
 
@@ -2508,6 +2512,47 @@ function updateCountdown() {
 }
 
 // ── Travel status banner ──────────────────────────────────────
+// ── Day-by-day location lookup ──────────────────────────────
+const TRIP_SEGMENTS = [
+  { start: '2026-08-11', end: '2026-08-11', badge: '✈️ In Transit',  short: 'Adelaide → Dubai', text: '✈️ Currently en route — Adelaide → Dubai' },
+  { start: '2026-08-12', end: '2026-08-12', badge: '✈️ Arriving',    short: 'Arriving Istanbul', text: '✈️ Arriving in Istanbul today' },
+  { start: '2026-08-13', end: '2026-08-16', badge: '📍 Istanbul',    short: 'Istanbul, Turkey', text: '📍 Currently in Istanbul, Turkey' },
+  { start: '2026-08-17', end: '2026-08-17', badge: '✈️ In Transit',  short: 'Istanbul → Zagreb', text: '✈️ Currently en route — Istanbul → Zagreb' },
+  { start: '2026-08-18', end: '2026-08-18', badge: '📍 Zagreb',      short: 'Zagreb, Croatia', text: '📍 Currently in Zagreb, Croatia' },
+  { start: '2026-08-19', end: '2026-08-19', badge: '🚢 Embarking',   short: 'Zagreb → Rovinj', text: '🚢 Currently en route — Zagreb → Rovinj' },
+  { start: '2026-08-20', end: '2026-08-20', badge: '🚢 Pula',        short: 'Pula, Croatia', text: '🚢 Currently in Pula, Croatia' },
+  { start: '2026-08-21', end: '2026-08-21', badge: '🚢 Mali Lošinj', short: 'Mali Lošinj, Croatia', text: '🚢 Currently in Mali Lošinj, Croatia' },
+  { start: '2026-08-22', end: '2026-08-22', badge: '🚢 Zadar',       short: 'Zadar, Croatia', text: '🚢 Currently in Zadar, Croatia' },
+  { start: '2026-08-23', end: '2026-08-23', badge: '🚢 Šibenik',     short: 'Šibenik, Croatia', text: '🚢 Currently in Šibenik, Croatia' },
+  { start: '2026-08-24', end: '2026-08-24', badge: '🚢 Omiš',        short: 'Omiš, Croatia', text: '🚢 Currently in Omiš, Croatia' },
+  { start: '2026-08-25', end: '2026-08-25', badge: '🚢 Hvar',        short: 'Hvar, Croatia', text: '🚢 Currently in Hvar, Croatia' },
+  { start: '2026-08-26', end: '2026-08-26', badge: '🚢 Bosnia',      short: 'Bosnia & Herzegovina', text: '🚢 Currently in Bosnia & Herzegovina' },
+  { start: '2026-08-27', end: '2026-08-27', badge: '🚢 Korčula',     short: 'Korčula, Croatia', text: '🚢 Currently in Korčula, Croatia' },
+  { start: '2026-08-28', end: '2026-08-28', badge: '🚢 Slano',       short: 'Slano, Croatia', text: '🚢 Currently in Slano, Croatia' },
+  { start: '2026-08-29', end: '2026-08-29', badge: '🚢 Cavtat',      short: 'Cavtat, Croatia', text: '🚢 Currently in Cavtat, Croatia' },
+  { start: '2026-08-30', end: '2026-08-31', badge: '🚢 Dubrovnik',   short: 'Dubrovnik, Croatia', text: '🚢 Currently in Dubrovnik, Croatia' },
+  { start: '2026-09-01', end: '2026-09-01', badge: '✈️ In Transit',  short: 'Dubrovnik → Rome', text: '✈️ Currently en route — Dubrovnik → Rome' },
+  { start: '2026-09-02', end: '2026-09-02', badge: '📍 Rome',        short: 'Rome, Italy', text: '📍 Currently in Rome, Italy' },
+  { start: '2026-09-03', end: '2026-09-03', badge: '🚗 In Transit',  short: 'Rome → Lecce', text: '🚗 Currently en route — Rome → Lecce' },
+  { start: '2026-09-04', end: '2026-09-10', badge: '🚴 Puglia',      short: 'Puglia — Cycling Tour', text: '🚴 Currently in Puglia — Cycling Tour' },
+  { start: '2026-09-11', end: '2026-09-11', badge: '🚴 In Transit',  short: 'Arriving Monopoli', text: '🚴 Currently en route — arriving Monopoli' },
+  { start: '2026-09-12', end: '2026-09-16', badge: '📍 Monopoli',    short: 'Monopoli, Puglia', text: '📍 Currently in Monopoli, Puglia' },
+  { start: '2026-09-17', end: '2026-09-17', badge: '✈️ In Transit',  short: 'Bari → Munich', text: '✈️ Currently en route — Bari → Munich' },
+  { start: '2026-09-18', end: '2026-09-19', badge: '📍 Munich',      short: 'Munich, Germany', text: '📍 Currently in Munich, Germany' },
+  { start: '2026-09-20', end: '2026-09-20', badge: '✈️ In Transit',  short: 'Munich → Helsinki → Tokyo', text: '✈️ Currently en route — Munich → Helsinki → Tokyo' },
+  { start: '2026-09-21', end: '2026-09-21', badge: '📍 Tokyo',       short: 'Tokyo, Japan', text: '📍 Currently in Tokyo, Japan' },
+  { start: '2026-09-22', end: '2026-09-22', badge: '✈️ In Transit',  short: 'Tokyo → Sydney → Adelaide', text: '✈️ Currently en route — Tokyo → Sydney → Adelaide' }
+];
+
+function getTodaySegment() {
+  const now = new Date();
+  const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+  for (const seg of TRIP_SEGMENTS) {
+    if (todayStr >= seg.start && todayStr <= seg.end) return seg;
+  }
+  return null;
+}
+
 function updateStatus() {
   const now = new Date();
 
@@ -2532,9 +2577,16 @@ function updateStatus() {
     statusEl.textContent   = '🗓 Pre-departure';
     statusEl.className     = 'status-badge status-pre';
   } else if (now <= RETURN) {
-    todayEl.textContent    = '✈️ Currently travelling Europe!';
-    tomorrowEl.textContent = 'Check the itinerary for today\'s details';
-    statusEl.textContent   = '🌍 In transit';
+    const seg = getTodaySegment();
+    if (seg) {
+      todayEl.textContent    = seg.short;
+      tomorrowEl.textContent = 'Check the itinerary for today\'s details';
+      statusEl.textContent   = seg.badge;
+    } else {
+      todayEl.textContent    = '✈️ Currently travelling Europe!';
+      tomorrowEl.textContent = 'Check the itinerary for today\'s details';
+      statusEl.textContent   = '🌍 In transit';
+    }
     statusEl.className     = 'status-badge status-active';
   } else {
     todayEl.textContent    = 'Back home in Adelaide 🏠';
